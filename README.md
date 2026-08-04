@@ -139,9 +139,9 @@ The generator supports multi-million record scale output configurable for distri
                                           v
 +-----------------------------------------------------------------------------------+
 |                      4. BUSINESS DASHBOARD & VISUALIZATION                        |
-|  - Python Web Dashboard Server (app.py) & REST API (/api/clickstream_funnel)      |
-|  - Optimized Glassmorphism UI Generator (scripts/node_pipeline_runner.js)         |
-|  - Interactive Suite (index.html - 1.15 MB lightweight payload)                   |
+|  - Python Web Dashboard Server (app.py) & REST API (/api/data)                     |
+|  - High Performance React (Vite) Single Page Application (frontend/)              |
+|  - Interactive Glassmorphism Suite (Executive, Funnel, RFM, Cohorts, Basket Rules) |
 +-----------------------------------------------------------------------------------+
 ```
 
@@ -149,27 +149,36 @@ The generator supports multi-million record scale output configurable for distri
 
 ## 🚀 How to Run the Pipeline
 
-### 1. Install Dependencies
+### 1. Install Backend Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Execute Complete Pipeline (Python Workflow)
-Run all raw generation, ETL stages, analytics models, RFM K-Means clustering, association rules, and funnel pre-computations:
+### 2. Install React Frontend Dependencies & Build UI
 ```bash
-python run_pipeline.py
+cd frontend
+npm install
+npm run build
+cd ..
 ```
 
-### 3. Generate / Update Dashboard Web UI
+### 3. Execute Complete Pipeline (Python Workflow)
+Run all raw data generation, ETL stages, analytics models, RFM K-Means clustering, association rules, and funnel pre-computations:
 ```bash
-node scripts/node_pipeline_runner.js
+python run_pipeline.py
 ```
 
 ### 4. Launch Interactive Web Dashboard Server
 ```bash
 python app.py
 ```
-Then open `http://localhost:8501` or view [index.html](file:///d:/codeing/Big_Data/index.html) directly in your browser.
+Then open `http://localhost:8501` to view the React Single Page Application dashboard!
+
+*Optional*: To run the React development server with Hot Module Replacement (HMR):
+```bash
+cd frontend
+npm run dev
+```
 
 ---
 

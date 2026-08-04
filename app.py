@@ -20,14 +20,18 @@ def load_csv(filepath):
         return list(csv.DictReader(f))
 
 class DashboardHandler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "*")
+        super().end_headers()
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.end_headers()
+
     def do_GET(self):
-        if self.path == "/" or self.path == "/index.html":
-            self.send_response(200)
-            self.send_header("Content-type", "text/html")
-            self.end_headers()
-            with open("index.html", "rb") as f:
-                self.wfile.write(f.read())
-        elif self.path == "/api/data":
+        if self.path == "/api/data":
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -53,19 +57,36 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     funnel_summary = json.load(f)
             self.wfile.write(json.dumps(funnel_summary).encode("utf-8"))
         else:
-            super().do_GET()
+            # Serve React built static assets from frontend/dist if available
+            dist_dir = os.path.join(os.path.dirname(__file__), "frontend", "dist")
+            req_path = self.path.lstrip("/")
+            target_file = os.path.join(dist_dir, req_path)
+
+            if os.path.exists(target_file) and os.path.isfile(target_file):
+                self.send_response(200)
+                if target_file.endswith(".html"):
+                    self.send_header("Content-type", "text/html")
+                elif target_file.endswith(".js"):
+                    self.send_header("Content-type", "application/javascript")
+                elif target_file.endswith(".css"):
+                    self.send_header("Content-type", "text/css")
+                self.end_headers()
+                with open(target_file, "rb") as f:
+                    self.wfile.write(f.read())
+            elif os.path.exists(os.path.join(dist_dir, "index.html")):
+                self.send_response(200)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
+                with open(os.path.join(dist_dir, "index.html"), "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                super().do_GET()
 
 def main():
     print("=========================================================")
     print(f"Starting Python E-Commerce Analytics Web Dashboard...")
-    print(f"URL: http://localhost:{PORT}")
+    print(f"API Server & React Frontend URL: http://localhost:{PORT}")
     print("=========================================================")
-
-    # Ensure index.html exists
-    if not os.path.exists("index.html"):
-        print("Generating index.html...")
-        import subprocess
-        subprocess.run([sys.executable, "scripts/node_pipeline_runner.js"], check=False)
 
     handler = DashboardHandler
     with socketserver.TCPServer(("", PORT), handler) as httpd:
