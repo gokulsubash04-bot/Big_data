@@ -1,0 +1,87 @@
+{
+  "event_counts": {
+    "view": 52038,
+    "search": 8025,
+    "add_to_cart": 16040,
+    "purchase": 3897
+  },
+  "session_counts": {
+    "view": 13808,
+    "search": 6056,
+    "add_to_cart": 9307,
+    "purchase": 3422,
+    "total_sessions": 14613
+  },
+  "stage_conversions": {
+    "view_to_search": 43.86,
+    "search_to_cart": 153.68,
+    "cart_to_purchase": 36.77,
+    "overall_conversion": 24.78
+  },
+  "stage_drop_offs": {
+    "view_to_search_drop_pct": 56.14,
+    "search_to_cart_drop_pct": -53.68,
+    "cart_to_purchase_drop_pct": 63.23,
+    "view_to_search_drop_count": 7752,
+    "search_to_cart_drop_count": 0,
+    "cart_to_purchase_drop_count": 5885
+  },
+  "device_breakdown": {
+    "Desktop": {
+      "views": 16455,
+      "searches": 2658,
+      "add_to_carts": 5120,
+      "purchases": 1229,
+      "total_sessions": 4670,
+      "view_to_cart_pct": 31.12,
+      "cart_to_purchase_pct": 24.0,
+      "overall_conversion_pct": 26.32
+    },
+    "Mobile": {
+      "views": 31564,
+      "searches": 4736,
+      "add_to_carts": 9706,
+      "purchases": 2360,
+      "total_sessions": 8830,
+      "view_to_cart_pct": 30.75,
+      "cart_to_purchase_pct": 24.31,
+      "overall_conversion_pct": 26.73
+    },
+    "Tablet": {
+      "views": 4019,
+      "searches": 631,
+      "add_to_carts": 1214,
+      "purchases": 308,
+      "total_sessions": 1113,
+      "view_to_cart_pct": 30.21,
+      "cart_to_purchase_pct": 25.37,
+      "overall_conversion_pct": 27.67
+    }
+  },
+  "hourly_distribution": {
+    "0": 3267,
+    "1": 3512,
+    "2": 3338,
+    "3": 3492,
+    "4": 3178,
+    "5": 3245,
+    "6": 3139,
+    "7": 3220,
+    "8": 3604,
+    "9": 3318,
+    "10": 3488,
+    "11": 3145,
+    "12": 3359,
+    "13": 3300,
+    "14": 3556,
+    "15": 3026,
+    "16": 3322,
+    "17": 3291,
+    "18": 3447,
+    "19": 3370,
+    "20": 3280,
+    "21": 3486,
+    "22": 3310,
+    "23": 3307
+  }
+}
