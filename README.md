@@ -165,3 +165,5 @@ Then open `http://localhost:8501` or view `index.html` directly in your browser.
 3. **Market Basket Association Rules**:
    - Identified high **Lift (>1.4x)** product bundles (e.g., *Product 6 Luxury + Product 15 Modern*).
    - **Recommendation**: Place dynamic product bundle recommendations on product pages and cart checkout modals to boost **Average Order Value (AOV)**.
+#   B i g _ d a t a  
+ 
