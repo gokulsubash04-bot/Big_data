@@ -782,9 +782,9 @@ const htmlContent = `<!DOCTYPE html>
     // Render Funnel Stage Cards
     const stages = [
       { id: 'view', name: '1. Page Views', count: evCounts.view || 0, sess: sessCounts.view || 0, icon: '👁️', color: '#06b6d4', convPct: 100 },
-      { id: 'search', name: '2. Product Searches', count: evCounts.search || 0, sess: sessCounts.search || 0, icon: '🔍', color: '#6366f1', convPct: conversions.view_to_search || 0, dropPct: dropOffs.view_to_search_drop_pct || 0, dropCount: dropOffs.view_to_search_drop_count || 0 },
-      { id: 'cart', name: '3. Add to Cart', count: evCounts.add_to_cart || 0, sess: sessCounts.add_to_cart || 0, icon: '🛒', color: '#f59e0b', convPct: conversions.view_to_cart || 0, dropPct: dropOffs.view_to_cart_drop_pct || 0, dropCount: dropOffs.view_to_cart_drop_count || 0 },
-      { id: 'purchase', name: '4. Purchase Completed', count: evCounts.purchase || 0, sess: sessCounts.purchase || 0, icon: '🎉', color: '#10b981', convPct: conversions.cart_to_purchase || 0, dropPct: dropOffs.cart_to_purchase_drop_pct || 0, dropCount: dropOffs.cart_to_purchase_drop_count || 0 }
+      { id: 'search', name: '2. Product Searches', count: evCounts.search || 0, sess: sessCounts.search || 0, icon: '🔍', color: '#6366f1', convPct: conversions.view_to_search, dropPct: dropOffs.view_to_search_drop_pct, dropCount: dropOffs.view_to_search_drop_count },
+      { id: 'cart', name: '3. Add to Cart', count: evCounts.add_to_cart || 0, sess: sessCounts.add_to_cart || 0, icon: '🛒', color: '#f59e0b', convPct: conversions.search_to_cart, dropPct: dropOffs.search_to_cart_drop_pct, dropCount: dropOffs.search_to_cart_drop_count },
+      { id: 'purchase', name: '4. Purchase Completed', count: evCounts.purchase || 0, sess: sessCounts.purchase || 0, icon: '🎉', color: '#10b981', convPct: conversions.cart_to_purchase, dropPct: dropOffs.cart_to_purchase_drop_pct, dropCount: dropOffs.cart_to_purchase_drop_count }
     ];
 
     const flowContainer = document.getElementById('funnelStagesFlow');
@@ -805,7 +805,7 @@ const htmlContent = `<!DOCTYPE html>
               '<span>Step Conversion:</span> <strong>' + st.convPct + '%</strong>' +
             '</div>' +
             '<div style="display:flex; justify-content:space-between; color:var(--rose); margin-top:4px;">' +
-              '<span>Stage Drop-off:</span> <strong>-' + Math.abs(st.dropPct) + '% (' + (st.dropCount || 0).toLocaleString() + ' sess)</strong>' +
+              '<span>Stage Drop-off:</span> <strong>-' + st.dropPct + '% (' + (st.dropCount || 0).toLocaleString() + ' sess)</strong>' +
             '</div>' +
           '</div>';
         } else {

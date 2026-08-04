@@ -1106,7 +1106,7 @@
       }
     });
 
-    const funnelSummary = {"event_counts":{"view":52038,"search":8025,"add_to_cart":16040,"purchase":3897},"session_counts":{"view":13808,"search":6056,"add_to_cart":9307,"purchase":3422,"total_sessions":14613},"stage_conversions":{"view_to_search":43.86,"search_to_cart":153.68,"cart_to_purchase":36.77,"overall_conversion":24.78},"stage_drop_offs":{"view_to_search_drop_pct":56.14,"search_to_cart_drop_pct":-53.68,"cart_to_purchase_drop_pct":63.23,"view_to_search_drop_count":7752,"search_to_cart_drop_count":0,"cart_to_purchase_drop_count":5885},"device_breakdown":{"Desktop":{"views":16455,"searches":2658,"add_to_carts":5120,"purchases":1229,"total_sessions":4670,"view_to_cart_pct":31.12,"cart_to_purchase_pct":24,"overall_conversion_pct":26.32},"Mobile":{"views":31564,"searches":4736,"add_to_carts":9706,"purchases":2360,"total_sessions":8830,"view_to_cart_pct":30.75,"cart_to_purchase_pct":24.31,"overall_conversion_pct":26.73},"Tablet":{"views":4019,"searches":631,"add_to_carts":1214,"purchases":308,"total_sessions":1113,"view_to_cart_pct":30.21,"cart_to_purchase_pct":25.37,"overall_conversion_pct":27.67}},"hourly_distribution":{"0":3267,"1":3512,"2":3338,"3":3492,"4":3178,"5":3245,"6":3139,"7":3220,"8":3604,"9":3318,"10":3488,"11":3145,"12":3359,"13":3300,"14":3556,"15":3026,"16":3322,"17":3291,"18":3447,"19":3370,"20":3280,"21":3486,"22":3310,"23":3307}};
+    const funnelSummary = {"event_counts":{"view":52038,"search":8025,"add_to_cart":16040,"purchase":3897},"session_counts":{"view":13808,"search":6056,"add_to_cart":9307,"purchase":3422,"total_sessions":14613},"stage_conversions":{"view_to_search":43.86,"view_to_cart":67.4,"cart_to_purchase":36.77,"overall_conversion":24.78},"stage_drop_offs":{"view_to_search_drop_pct":56.14,"view_to_cart_drop_pct":32.6,"cart_to_purchase_drop_pct":63.23,"view_to_search_drop_count":7752,"view_to_cart_drop_count":4501,"cart_to_purchase_drop_count":5885},"device_breakdown":{"Desktop":{"views":16455,"searches":2658,"add_to_carts":5120,"purchases":1229,"total_sessions":4670,"view_to_cart_pct":31.12,"cart_to_purchase_pct":24,"overall_conversion_pct":26.32},"Mobile":{"views":31564,"searches":4736,"add_to_carts":9706,"purchases":2360,"total_sessions":8830,"view_to_cart_pct":30.75,"cart_to_purchase_pct":24.31,"overall_conversion_pct":26.73},"Tablet":{"views":4019,"searches":631,"add_to_carts":1214,"purchases":308,"total_sessions":1113,"view_to_cart_pct":30.21,"cart_to_purchase_pct":25.37,"overall_conversion_pct":27.67}},"hourly_distribution":{"0":3267,"1":3512,"2":3338,"3":3492,"4":3178,"5":3245,"6":3139,"7":3220,"8":3604,"9":3318,"10":3488,"11":3145,"12":3359,"13":3300,"14":3556,"15":3026,"16":3322,"17":3291,"18":3447,"19":3370,"20":3280,"21":3486,"22":3310,"23":3307}};
     const evCounts = funnelSummary.event_counts || {};
     const sessCounts = funnelSummary.session_counts || {};
     const conversions = funnelSummary.stage_conversions || {};
@@ -1185,9 +1185,9 @@
     // Render Funnel Stage Cards
     const stages = [
       { id: 'view', name: '1. Page Views', count: evCounts.view || 0, sess: sessCounts.view || 0, icon: '👁️', color: '#06b6d4', convPct: 100 },
-      { id: 'search', name: '2. Product Searches', count: evCounts.search || 0, sess: sessCounts.search || 0, icon: '🔍', color: '#6366f1', convPct: conversions.view_to_search, dropPct: dropOffs.view_to_search_drop_pct, dropCount: dropOffs.view_to_search_drop_count },
-      { id: 'cart', name: '3. Add to Cart', count: evCounts.add_to_cart || 0, sess: sessCounts.add_to_cart || 0, icon: '🛒', color: '#f59e0b', convPct: conversions.search_to_cart, dropPct: dropOffs.search_to_cart_drop_pct, dropCount: dropOffs.search_to_cart_drop_count },
-      { id: 'purchase', name: '4. Purchase Completed', count: evCounts.purchase || 0, sess: sessCounts.purchase || 0, icon: '🎉', color: '#10b981', convPct: conversions.cart_to_purchase, dropPct: dropOffs.cart_to_purchase_drop_pct, dropCount: dropOffs.cart_to_purchase_drop_count }
+      { id: 'search', name: '2. Product Searches', count: evCounts.search || 0, sess: sessCounts.search || 0, icon: '🔍', color: '#6366f1', convPct: conversions.view_to_search || 0, dropPct: dropOffs.view_to_search_drop_pct || 0, dropCount: dropOffs.view_to_search_drop_count || 0 },
+      { id: 'cart', name: '3. Add to Cart', count: evCounts.add_to_cart || 0, sess: sessCounts.add_to_cart || 0, icon: '🛒', color: '#f59e0b', convPct: conversions.view_to_cart || 0, dropPct: dropOffs.view_to_cart_drop_pct || 0, dropCount: dropOffs.view_to_cart_drop_count || 0 },
+      { id: 'purchase', name: '4. Purchase Completed', count: evCounts.purchase || 0, sess: sessCounts.purchase || 0, icon: '🎉', color: '#10b981', convPct: conversions.cart_to_purchase || 0, dropPct: dropOffs.cart_to_purchase_drop_pct || 0, dropCount: dropOffs.cart_to_purchase_drop_count || 0 }
     ];
 
     const flowContainer = document.getElementById('funnelStagesFlow');
@@ -1208,7 +1208,7 @@
               '<span>Step Conversion:</span> <strong>' + st.convPct + '%</strong>' +
             '</div>' +
             '<div style="display:flex; justify-content:space-between; color:var(--rose); margin-top:4px;">' +
-              '<span>Stage Drop-off:</span> <strong>-' + st.dropPct + '% (' + (st.dropCount || 0).toLocaleString() + ' sess)</strong>' +
+              '<span>Stage Drop-off:</span> <strong>-' + Math.abs(st.dropPct) + '% (' + (st.dropCount || 0).toLocaleString() + ' sess)</strong>' +
             '</div>' +
           '</div>';
         } else {

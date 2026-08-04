@@ -95,17 +95,17 @@ def main():
 
     stage_conversions = {
         "view_to_search": round((search_sess / view_sess * 100), 2) if view_sess > 0 else 0.0,
-        "view_to_cart": round((cart_sess / view_sess * 100), 2) if view_sess > 0 else 0.0,
+        "search_to_cart": round((cart_sess / search_sess * 100), 2) if search_sess > 0 else 0.0,
         "cart_to_purchase": round((purch_sess / cart_sess * 100), 2) if cart_sess > 0 else 0.0,
         "overall_conversion": round((purch_sess / view_sess * 100), 2) if view_sess > 0 else 0.0
     }
 
     stage_drop_offs = {
-        "view_to_search_drop_pct": round(max(0.0, 100.0 - stage_conversions["view_to_search"]), 2),
-        "view_to_cart_drop_pct": round(max(0.0, 100.0 - stage_conversions["view_to_cart"]), 2),
-        "cart_to_purchase_drop_pct": round(max(0.0, 100.0 - stage_conversions["cart_to_purchase"]), 2),
+        "view_to_search_drop_pct": round(100 - stage_conversions["view_to_search"], 2),
+        "search_to_cart_drop_pct": round(100 - stage_conversions["search_to_cart"], 2),
+        "cart_to_purchase_drop_pct": round(100 - stage_conversions["cart_to_purchase"], 2),
         "view_to_search_drop_count": max(0, view_sess - search_sess),
-        "view_to_cart_drop_count": max(0, view_sess - cart_sess),
+        "search_to_cart_drop_count": max(0, search_sess - cart_sess),
         "cart_to_purchase_drop_count": max(0, cart_sess - purch_sess)
     }
 

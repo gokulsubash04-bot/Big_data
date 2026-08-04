@@ -14,16 +14,16 @@
   },
   "stage_conversions": {
     "view_to_search": 43.86,
-    "search_to_cart": 153.68,
+    "view_to_cart": 67.4,
     "cart_to_purchase": 36.77,
     "overall_conversion": 24.78
   },
   "stage_drop_offs": {
     "view_to_search_drop_pct": 56.14,
-    "search_to_cart_drop_pct": -53.68,
+    "view_to_cart_drop_pct": 32.6,
     "cart_to_purchase_drop_pct": 63.23,
     "view_to_search_drop_count": 7752,
-    "search_to_cart_drop_count": 0,
+    "view_to_cart_drop_count": 4501,
     "cart_to_purchase_drop_count": 5885
   },
   "device_breakdown": {
