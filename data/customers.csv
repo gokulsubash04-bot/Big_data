@@ -1,0 +1,2385 @@
+customer_id,country
+CUST_00001,United States
+CUST_00002,United States
+CUST_00003,Australia
+CUST_00005,United States
+CUST_00006,United Kingdom
+CUST_00007,United Kingdom
+CUST_00008,Australia
+CUST_00009,United Kingdom
+CUST_00011,United States
+CUST_00012,United States
+CUST_00013,United Kingdom
+CUST_00014,United States
+CUST_00016,Australia
+CUST_00017,Germany
+CUST_00018,Germany
+CUST_00019,United States
+CUST_00021,Germany
+CUST_00022,United Kingdom
+CUST_00023,Germany
+CUST_00024,United States
+CUST_00025,Canada
+CUST_00026,United States
+CUST_00027,United Kingdom
+CUST_00028,United States
+CUST_00030,United States
+CUST_00031,France
+CUST_00032,United Kingdom
+CUST_00033,United States
+CUST_00034,United States
+CUST_00035,Germany
+CUST_00037,Germany
+CUST_00038,United States
+CUST_00039,France
+CUST_00040,France
+CUST_00041,France
+CUST_00043,United Kingdom
+CUST_00044,United Kingdom
+CUST_00045,United States
+CUST_00046,United States
+CUST_00047,France
+CUST_00048,United Kingdom
+CUST_00049,Germany
+CUST_00050,United States
+CUST_00051,United States
+CUST_00052,United Kingdom
+CUST_00053,United States
+CUST_00054,Australia
+CUST_00055,United States
+CUST_00056,France
+CUST_00057,United States
+CUST_00058,United Kingdom
+CUST_00059,United States
+CUST_00061,Germany
+CUST_00062,United States
+CUST_00063,United Kingdom
+CUST_00064,Germany
+CUST_00065,United States
+CUST_00066,United States
+CUST_00067,United Kingdom
+CUST_00068,United Kingdom
+CUST_00069,France
+CUST_00070,France
+CUST_00071,Germany
+CUST_00072,United States
+CUST_00074,United States
+CUST_00075,United Kingdom
+CUST_00076,United Kingdom
+CUST_00077,Canada
+CUST_00079,United Kingdom
+CUST_00080,Germany
+CUST_00081,Germany
+CUST_00082,Australia
+CUST_00083,United States
+CUST_00085,Germany
+CUST_00086,United Kingdom
+CUST_00087,United States
+CUST_00088,United States
+CUST_00089,United States
+CUST_00090,United States
+CUST_00091,France
+CUST_00092,United States
+CUST_00093,United States
+CUST_00094,France
+CUST_00095,United States
+CUST_00096,United States
+CUST_00097,United States
+CUST_00098,France
+CUST_00099,France
+CUST_00100,Australia
+CUST_00101,Australia
+CUST_00102,France
+CUST_00103,Australia
+CUST_00104,United States
+CUST_00105,Australia
+CUST_00106,United States
+CUST_00107,United Kingdom
+CUST_00108,United Kingdom
+CUST_00109,United States
+CUST_00110,France
+CUST_00111,United States
+CUST_00112,United States
+CUST_00113,France
+CUST_00114,United States
+CUST_00115,United Kingdom
+CUST_00116,Australia
+CUST_00117,United States
+CUST_00118,France
+CUST_00119,Germany
+CUST_00120,Australia
+CUST_00121,United States
+CUST_00122,United States
+CUST_00123,France
+CUST_00125,Australia
+CUST_00126,France
+CUST_00127,United States
+CUST_00128,United Kingdom
+CUST_00129,United States
+CUST_00130,United States
+CUST_00131,United States
+CUST_00133,United Kingdom
+CUST_00134,United States
+CUST_00135,United Kingdom
+CUST_00136,United States
+CUST_00137,United States
+CUST_00138,United Kingdom
+CUST_00139,Canada
+CUST_00140,United States
+CUST_00141,Canada
+CUST_00142,Germany
+CUST_00143,United States
+CUST_00144,United States
+CUST_00145,France
+CUST_00146,United Kingdom
+CUST_00147,Germany
+CUST_00148,United States
+CUST_00149,United States
+CUST_00150,Germany
+CUST_00151,United Kingdom
+CUST_00152,United States
+CUST_00153,Australia
+CUST_00154,Canada
+CUST_00155,United States
+CUST_00156,United States
+CUST_00157,Canada
+CUST_00158,United States
+CUST_00159,United States
+CUST_00160,France
+CUST_00161,United States
+CUST_00162,United Kingdom
+CUST_00163,United States
+CUST_00164,United States
+CUST_00165,United States
+CUST_00166,United States
+CUST_00167,United States
+CUST_00168,France
+CUST_00169,Canada
+CUST_00171,France
+CUST_00172,Germany
+CUST_00173,France
+CUST_00174,United Kingdom
+CUST_00175,United States
+CUST_00176,United States
+CUST_00177,United Kingdom
+CUST_00178,United Kingdom
+CUST_00179,United Kingdom
+CUST_00180,United Kingdom
+CUST_00181,United States
+CUST_00182,United States
+CUST_00183,United States
+CUST_00184,France
+CUST_00185,United States
+CUST_00186,United States
+CUST_00187,United States
+CUST_00188,Germany
+CUST_00189,United States
+CUST_00190,Germany
+CUST_00191,United States
+CUST_00193,Canada
+CUST_00194,United States
+CUST_00195,United Kingdom
+CUST_00196,United States
+CUST_00197,United States
+CUST_00198,United States
+CUST_00199,United States
+CUST_00200,Germany
+CUST_00201,Japan
+CUST_00202,United States
+CUST_00203,United States
+CUST_00204,Canada
+CUST_00205,United States
+CUST_00206,Canada
+CUST_00207,United States
+CUST_00208,United States
+CUST_00209,United Kingdom
+CUST_00210,United Kingdom
+CUST_00211,United Kingdom
+CUST_00212,United States
+CUST_00213,Germany
+CUST_00214,United Kingdom
+CUST_00215,United Kingdom
+CUST_00216,Canada
+CUST_00217,Canada
+CUST_00218,France
+CUST_00219,United Kingdom
+CUST_00220,United Kingdom
+CUST_00222,Australia
+CUST_00223,United States
+CUST_00224,United Kingdom
+CUST_00225,United Kingdom
+CUST_00226,United Kingdom
+CUST_00227,United States
+CUST_00228,United States
+CUST_00229,United Kingdom
+CUST_00230,United States
+CUST_00231,France
+CUST_00232,United Kingdom
+CUST_00233,United States
+CUST_00234,United States
+CUST_00235,Canada
+CUST_00236,United Kingdom
+CUST_00239,United Kingdom
+CUST_00240,United States
+CUST_00241,United States
+CUST_00242,United States
+CUST_00243,Australia
+CUST_00244,United States
+CUST_00245,United States
+CUST_00246,United Kingdom
+CUST_00247,United States
+CUST_00248,United States
+CUST_00249,France
+CUST_00250,United States
+CUST_00251,United States
+CUST_00252,Germany
+CUST_00253,Germany
+CUST_00254,France
+CUST_00255,France
+CUST_00256,United States
+CUST_00257,United States
+CUST_00258,United States
+CUST_00259,Germany
+CUST_00260,Germany
+CUST_00261,United States
+CUST_00262,United States
+CUST_00263,United States
+CUST_00264,United States
+CUST_00265,United States
+CUST_00266,United Kingdom
+CUST_00267,United States
+CUST_00268,United Kingdom
+CUST_00269,Germany
+CUST_00270,France
+CUST_00271,France
+CUST_00272,Canada
+CUST_00273,France
+CUST_00274,United Kingdom
+CUST_00275,United States
+CUST_00276,United States
+CUST_00277,United States
+CUST_00279,United States
+CUST_00280,United States
+CUST_00281,United Kingdom
+CUST_00282,Australia
+CUST_00283,United Kingdom
+CUST_00284,United States
+CUST_00285,United States
+CUST_00286,United States
+CUST_00287,United States
+CUST_00288,United States
+CUST_00289,United Kingdom
+CUST_00290,Australia
+CUST_00291,United States
+CUST_00292,United States
+CUST_00293,United States
+CUST_00294,United Kingdom
+CUST_00295,Germany
+CUST_00296,Germany
+CUST_00297,United States
+CUST_00298,United Kingdom
+CUST_00299,Germany
+CUST_00300,Germany
+CUST_00301,France
+CUST_00302,United States
+CUST_00303,Canada
+CUST_00304,Japan
+CUST_00305,Australia
+CUST_00306,Australia
+CUST_00307,Canada
+CUST_00308,Australia
+CUST_00309,Germany
+CUST_00311,Canada
+CUST_00312,France
+CUST_00313,United States
+CUST_00314,United States
+CUST_00315,France
+CUST_00316,United Kingdom
+CUST_00318,United States
+CUST_00319,United States
+CUST_00320,Australia
+CUST_00321,France
+CUST_00322,Germany
+CUST_00323,Australia
+CUST_00324,Germany
+CUST_00325,United States
+CUST_00326,Germany
+CUST_00327,France
+CUST_00328,United States
+CUST_00329,France
+CUST_00330,Canada
+CUST_00331,Japan
+CUST_00332,Canada
+CUST_00333,Canada
+CUST_00334,United States
+CUST_00336,United States
+CUST_00337,Japan
+CUST_00338,United Kingdom
+CUST_00339,Germany
+CUST_00340,Germany
+CUST_00341,Germany
+CUST_00342,France
+CUST_00343,United Kingdom
+CUST_00344,United Kingdom
+CUST_00345,United States
+CUST_00346,United Kingdom
+CUST_00347,United Kingdom
+CUST_00348,Germany
+CUST_00349,United States
+CUST_00350,United States
+CUST_00351,United Kingdom
+CUST_00352,France
+CUST_00353,United States
+CUST_00354,United Kingdom
+CUST_00355,Canada
+CUST_00357,United States
+CUST_00358,United States
+CUST_00359,Germany
+CUST_00360,United States
+CUST_00361,France
+CUST_00362,United Kingdom
+CUST_00363,United States
+CUST_00364,Canada
+CUST_00365,United Kingdom
+CUST_00366,United States
+CUST_00367,United States
+CUST_00368,United States
+CUST_00369,United States
+CUST_00370,Australia
+CUST_00371,France
+CUST_00372,United Kingdom
+CUST_00373,United Kingdom
+CUST_00374,Germany
+CUST_00375,Germany
+CUST_00376,Australia
+CUST_00377,France
+CUST_00378,United States
+CUST_00379,Canada
+CUST_00380,United States
+CUST_00381,United States
+CUST_00382,Japan
+CUST_00383,United States
+CUST_00384,France
+CUST_00385,United States
+CUST_00386,United Kingdom
+CUST_00387,United States
+CUST_00388,United Kingdom
+CUST_00389,United States
+CUST_00390,Germany
+CUST_00391,Australia
+CUST_00392,Germany
+CUST_00393,United States
+CUST_00394,United Kingdom
+CUST_00395,Germany
+CUST_00396,Germany
+CUST_00397,United States
+CUST_00399,Australia
+CUST_00401,United States
+CUST_00402,United States
+CUST_00403,Germany
+CUST_00404,United States
+CUST_00405,United Kingdom
+CUST_00406,United States
+CUST_00407,France
+CUST_00408,United States
+CUST_00409,Japan
+CUST_00410,United Kingdom
+CUST_00411,United States
+CUST_00412,United States
+CUST_00414,United States
+CUST_00415,France
+CUST_00416,France
+CUST_00417,Canada
+CUST_00418,United Kingdom
+CUST_00419,Canada
+CUST_00420,United States
+CUST_00421,United States
+CUST_00422,Germany
+CUST_00423,Germany
+CUST_00425,United Kingdom
+CUST_00426,United Kingdom
+CUST_00427,United Kingdom
+CUST_00428,United States
+CUST_00429,United States
+CUST_00430,Germany
+CUST_00431,Germany
+CUST_00432,United States
+CUST_00433,Canada
+CUST_00434,United States
+CUST_00435,United States
+CUST_00436,United States
+CUST_00437,Australia
+CUST_00438,United States
+CUST_00439,United States
+CUST_00440,Germany
+CUST_00441,United States
+CUST_00442,United States
+CUST_00443,France
+CUST_00444,United States
+CUST_00445,United States
+CUST_00446,Germany
+CUST_00447,Australia
+CUST_00448,United Kingdom
+CUST_00449,United States
+CUST_00450,United States
+CUST_00451,United States
+CUST_00452,United States
+CUST_00453,United Kingdom
+CUST_00454,United Kingdom
+CUST_00455,Australia
+CUST_00456,United Kingdom
+CUST_00457,Australia
+CUST_00458,United States
+CUST_00459,United Kingdom
+CUST_00460,France
+CUST_00461,United States
+CUST_00462,United States
+CUST_00463,United Kingdom
+CUST_00464,France
+CUST_00465,France
+CUST_00466,Canada
+CUST_00467,United States
+CUST_00468,United Kingdom
+CUST_00469,Germany
+CUST_00470,France
+CUST_00471,United States
+CUST_00472,United States
+CUST_00473,Germany
+CUST_00474,United States
+CUST_00475,France
+CUST_00476,United States
+CUST_00477,France
+CUST_00478,United States
+CUST_00479,Japan
+CUST_00480,United States
+CUST_00481,Canada
+CUST_00482,United States
+CUST_00483,United States
+CUST_00484,United States
+CUST_00485,Canada
+CUST_00486,United States
+CUST_00487,France
+CUST_00488,United Kingdom
+CUST_00490,United States
+CUST_00492,Canada
+CUST_00493,United States
+CUST_00494,Germany
+CUST_00495,United States
+CUST_00496,United Kingdom
+CUST_00498,United Kingdom
+CUST_00499,United Kingdom
+CUST_00500,United States
+CUST_00501,Germany
+CUST_00502,United Kingdom
+CUST_00503,United States
+CUST_00504,Canada
+CUST_00505,United States
+CUST_00506,United Kingdom
+CUST_00507,France
+CUST_00508,United Kingdom
+CUST_00509,United States
+CUST_00511,United States
+CUST_00512,United States
+CUST_00513,United States
+CUST_00514,Canada
+CUST_00515,United States
+CUST_00516,United Kingdom
+CUST_00517,United States
+CUST_00518,Australia
+CUST_00519,United Kingdom
+CUST_00520,United States
+CUST_00522,Germany
+CUST_00523,Germany
+CUST_00524,Canada
+CUST_00525,United States
+CUST_00526,United States
+CUST_00527,United Kingdom
+CUST_00528,Canada
+CUST_00529,United Kingdom
+CUST_00530,United States
+CUST_00531,United Kingdom
+CUST_00532,France
+CUST_00533,United Kingdom
+CUST_00534,United States
+CUST_00535,United States
+CUST_00536,United States
+CUST_00537,United States
+CUST_00538,Canada
+CUST_00539,Canada
+CUST_00540,Germany
+CUST_00541,United States
+CUST_00542,United States
+CUST_00543,Germany
+CUST_00544,United States
+CUST_00545,United States
+CUST_00546,Japan
+CUST_00547,France
+CUST_00548,Australia
+CUST_00549,Japan
+CUST_00550,United States
+CUST_00551,United States
+CUST_00552,United States
+CUST_00553,United Kingdom
+CUST_00554,United Kingdom
+CUST_00555,United Kingdom
+CUST_00556,Canada
+CUST_00557,United States
+CUST_00558,United States
+CUST_00559,United States
+CUST_00560,Germany
+CUST_00561,United States
+CUST_00562,Australia
+CUST_00563,Germany
+CUST_00564,United States
+CUST_00565,United Kingdom
+CUST_00566,United States
+CUST_00567,Canada
+CUST_00568,United Kingdom
+CUST_00569,Canada
+CUST_00570,United States
+CUST_00571,United Kingdom
+CUST_00572,United Kingdom
+CUST_00573,United States
+CUST_00574,France
+CUST_00575,United Kingdom
+CUST_00576,Canada
+CUST_00577,United Kingdom
+CUST_00579,United States
+CUST_00580,United States
+CUST_00581,United Kingdom
+CUST_00582,United Kingdom
+CUST_00584,United States
+CUST_00585,United States
+CUST_00586,United States
+CUST_00587,United Kingdom
+CUST_00588,Australia
+CUST_00589,United Kingdom
+CUST_00590,United Kingdom
+CUST_00591,United States
+CUST_00592,United States
+CUST_00593,United Kingdom
+CUST_00594,United Kingdom
+CUST_00595,Australia
+CUST_00596,United States
+CUST_00597,United Kingdom
+CUST_00598,United States
+CUST_00599,United States
+CUST_00600,United Kingdom
+CUST_00601,United States
+CUST_00602,United States
+CUST_00603,Canada
+CUST_00604,United States
+CUST_00605,United States
+CUST_00606,Germany
+CUST_00607,United States
+CUST_00608,United States
+CUST_00609,United States
+CUST_00610,United Kingdom
+CUST_00611,United Kingdom
+CUST_00612,United States
+CUST_00613,France
+CUST_00614,United States
+CUST_00615,Germany
+CUST_00616,United Kingdom
+CUST_00617,France
+CUST_00618,United States
+CUST_00619,United Kingdom
+CUST_00620,United States
+CUST_00621,United States
+CUST_00622,Canada
+CUST_00623,Australia
+CUST_00624,Australia
+CUST_00625,United States
+CUST_00626,United States
+CUST_00627,United States
+CUST_00628,United States
+CUST_00629,United States
+CUST_00630,United States
+CUST_00631,United Kingdom
+CUST_00632,United States
+CUST_00633,United Kingdom
+CUST_00634,Canada
+CUST_00635,France
+CUST_00636,United States
+CUST_00637,Germany
+CUST_00638,United States
+CUST_00639,United States
+CUST_00640,United States
+CUST_00641,United States
+CUST_00642,United States
+CUST_00643,United States
+CUST_00644,United States
+CUST_00645,United Kingdom
+CUST_00646,Germany
+CUST_00647,Germany
+CUST_00648,United States
+CUST_00649,United Kingdom
+CUST_00650,France
+CUST_00651,United Kingdom
+CUST_00652,United States
+CUST_00653,United Kingdom
+CUST_00654,United States
+CUST_00655,Australia
+CUST_00656,United States
+CUST_00657,Japan
+CUST_00658,Germany
+CUST_00659,United States
+CUST_00661,United States
+CUST_00662,United States
+CUST_00663,United States
+CUST_00664,United States
+CUST_00665,France
+CUST_00666,United Kingdom
+CUST_00667,United States
+CUST_00668,United Kingdom
+CUST_00669,United States
+CUST_00670,United States
+CUST_00672,Germany
+CUST_00673,Germany
+CUST_00674,United States
+CUST_00675,United States
+CUST_00676,Canada
+CUST_00677,United Kingdom
+CUST_00678,United States
+CUST_00679,United States
+CUST_00680,Japan
+CUST_00681,Germany
+CUST_00682,United States
+CUST_00683,Germany
+CUST_00684,United States
+CUST_00685,United States
+CUST_00687,United States
+CUST_00688,United States
+CUST_00689,United States
+CUST_00690,United Kingdom
+CUST_00691,Germany
+CUST_00692,United States
+CUST_00693,United Kingdom
+CUST_00696,United States
+CUST_00697,United States
+CUST_00698,United Kingdom
+CUST_00699,Australia
+CUST_00700,Canada
+CUST_00701,Germany
+CUST_00702,United States
+CUST_00704,United Kingdom
+CUST_00705,United Kingdom
+CUST_00706,Japan
+CUST_00707,Germany
+CUST_00708,United Kingdom
+CUST_00709,United States
+CUST_00710,United States
+CUST_00712,Canada
+CUST_00713,United States
+CUST_00714,United States
+CUST_00715,United States
+CUST_00716,Japan
+CUST_00717,United Kingdom
+CUST_00718,Germany
+CUST_00719,Germany
+CUST_00720,United States
+CUST_00721,United Kingdom
+CUST_00722,United Kingdom
+CUST_00723,United States
+CUST_00724,United Kingdom
+CUST_00725,United States
+CUST_00726,Germany
+CUST_00727,United States
+CUST_00728,United States
+CUST_00729,United Kingdom
+CUST_00730,United States
+CUST_00731,United States
+CUST_00732,Australia
+CUST_00733,Germany
+CUST_00734,France
+CUST_00735,Japan
+CUST_00736,United States
+CUST_00737,United States
+CUST_00738,United States
+CUST_00739,United States
+CUST_00740,United States
+CUST_00741,United States
+CUST_00742,France
+CUST_00743,Japan
+CUST_00744,Canada
+CUST_00745,Germany
+CUST_00747,France
+CUST_00749,Australia
+CUST_00750,Germany
+CUST_00751,United States
+CUST_00752,United Kingdom
+CUST_00753,United States
+CUST_00754,United States
+CUST_00755,Germany
+CUST_00756,United Kingdom
+CUST_00757,United Kingdom
+CUST_00758,Australia
+CUST_00759,United States
+CUST_00760,United States
+CUST_00761,United Kingdom
+CUST_00762,United States
+CUST_00763,United States
+CUST_00764,United States
+CUST_00765,Australia
+CUST_00766,United States
+CUST_00767,United States
+CUST_00768,United States
+CUST_00769,Germany
+CUST_00770,Japan
+CUST_00771,United States
+CUST_00772,United States
+CUST_00773,United States
+CUST_00774,Australia
+CUST_00776,United Kingdom
+CUST_00777,United States
+CUST_00778,United States
+CUST_00779,United Kingdom
+CUST_00780,Australia
+CUST_00781,Germany
+CUST_00783,Germany
+CUST_00784,Japan
+CUST_00785,United States
+CUST_00786,United States
+CUST_00788,United States
+CUST_00789,United States
+CUST_00790,United States
+CUST_00791,Japan
+CUST_00792,Germany
+CUST_00793,United States
+CUST_00794,France
+CUST_00795,Australia
+CUST_00796,United Kingdom
+CUST_00797,United States
+CUST_00798,France
+CUST_00799,United States
+CUST_00800,United States
+CUST_00801,Japan
+CUST_00802,United States
+CUST_00803,United Kingdom
+CUST_00804,United Kingdom
+CUST_00805,United States
+CUST_00806,United States
+CUST_00807,Canada
+CUST_00808,United States
+CUST_00809,Japan
+CUST_00810,United States
+CUST_00811,United States
+CUST_00812,United States
+CUST_00813,Germany
+CUST_00814,Germany
+CUST_00815,France
+CUST_00816,United States
+CUST_00817,United States
+CUST_00818,United States
+CUST_00819,United States
+CUST_00820,United States
+CUST_00821,France
+CUST_00823,United States
+CUST_00824,United States
+CUST_00825,Canada
+CUST_00826,United States
+CUST_00827,United States
+CUST_00828,United Kingdom
+CUST_00829,United States
+CUST_00830,United Kingdom
+CUST_00831,United States
+CUST_00832,United States
+CUST_00833,United Kingdom
+CUST_00834,United Kingdom
+CUST_00835,United States
+CUST_00836,United Kingdom
+CUST_00837,United Kingdom
+CUST_00838,United Kingdom
+CUST_00839,United States
+CUST_00840,United States
+CUST_00841,United States
+CUST_00842,United Kingdom
+CUST_00843,Germany
+CUST_00844,United States
+CUST_00846,United States
+CUST_00847,United States
+CUST_00848,United Kingdom
+CUST_00849,France
+CUST_00850,France
+CUST_00851,Australia
+CUST_00852,United States
+CUST_00853,United States
+CUST_00854,Germany
+CUST_00855,Germany
+CUST_00856,United States
+CUST_00857,France
+CUST_00858,United States
+CUST_00859,Germany
+CUST_00860,France
+CUST_00861,United States
+CUST_00862,United States
+CUST_00863,Germany
+CUST_00864,Germany
+CUST_00865,Germany
+CUST_00866,United Kingdom
+CUST_00867,United States
+CUST_00868,United States
+CUST_00869,United States
+CUST_00870,United Kingdom
+CUST_00871,United States
+CUST_00872,Germany
+CUST_00873,France
+CUST_00874,United States
+CUST_00875,Germany
+CUST_00876,United States
+CUST_00877,Germany
+CUST_00878,United States
+CUST_00879,United States
+CUST_00882,Australia
+CUST_00883,United Kingdom
+CUST_00884,United States
+CUST_00885,United States
+CUST_00886,France
+CUST_00887,United States
+CUST_00888,Japan
+CUST_00889,Germany
+CUST_00890,United States
+CUST_00891,Germany
+CUST_00892,United States
+CUST_00893,United States
+CUST_00895,United States
+CUST_00896,United Kingdom
+CUST_00897,United States
+CUST_00898,United Kingdom
+CUST_00899,United States
+CUST_00900,United States
+CUST_00901,Germany
+CUST_00902,France
+CUST_00903,United States
+CUST_00904,United States
+CUST_00905,United Kingdom
+CUST_00906,United Kingdom
+CUST_00907,United States
+CUST_00908,United Kingdom
+CUST_00909,United States
+CUST_00910,United States
+CUST_00911,United States
+CUST_00912,United States
+CUST_00913,United States
+CUST_00914,United Kingdom
+CUST_00916,France
+CUST_00917,United Kingdom
+CUST_00918,United States
+CUST_00919,United States
+CUST_00920,United States
+CUST_00921,United States
+CUST_00922,United States
+CUST_00923,United States
+CUST_00924,United Kingdom
+CUST_00925,Canada
+CUST_00926,Germany
+CUST_00927,United States
+CUST_00929,United States
+CUST_00930,Germany
+CUST_00931,Germany
+CUST_00932,United States
+CUST_00933,United States
+CUST_00934,United Kingdom
+CUST_00935,United States
+CUST_00936,Canada
+CUST_00937,Germany
+CUST_00938,United Kingdom
+CUST_00939,United States
+CUST_00940,France
+CUST_00941,United Kingdom
+CUST_00942,Canada
+CUST_00943,United Kingdom
+CUST_00944,United Kingdom
+CUST_00945,United Kingdom
+CUST_00946,United States
+CUST_00947,Japan
+CUST_00948,United States
+CUST_00949,United States
+CUST_00950,United States
+CUST_00951,Australia
+CUST_00953,Germany
+CUST_00955,Japan
+CUST_00956,United States
+CUST_00957,Australia
+CUST_00958,France
+CUST_00959,Australia
+CUST_00960,United States
+CUST_00961,United States
+CUST_00962,United Kingdom
+CUST_00963,Germany
+CUST_00964,Japan
+CUST_00965,United States
+CUST_00966,United Kingdom
+CUST_00967,United States
+CUST_00968,United Kingdom
+CUST_00969,United States
+CUST_00970,Canada
+CUST_00971,France
+CUST_00973,United States
+CUST_00974,United Kingdom
+CUST_00975,United States
+CUST_00976,France
+CUST_00978,United States
+CUST_00979,Germany
+CUST_00980,Germany
+CUST_00981,United Kingdom
+CUST_00982,United Kingdom
+CUST_00983,United States
+CUST_00984,United States
+CUST_00985,Germany
+CUST_00986,United Kingdom
+CUST_00987,United Kingdom
+CUST_00988,United Kingdom
+CUST_00989,France
+CUST_00990,United Kingdom
+CUST_00991,France
+CUST_00993,United Kingdom
+CUST_00994,United Kingdom
+CUST_00995,Germany
+CUST_00996,United Kingdom
+CUST_00997,Australia
+CUST_00998,Germany
+CUST_00999,Germany
+CUST_01000,France
+CUST_01001,Canada
+CUST_01002,United Kingdom
+CUST_01003,United Kingdom
+CUST_01004,Germany
+CUST_01005,France
+CUST_01006,Germany
+CUST_01007,United States
+CUST_01008,United States
+CUST_01009,United Kingdom
+CUST_01010,United States
+CUST_01011,United Kingdom
+CUST_01012,United States
+CUST_01013,France
+CUST_01014,United States
+CUST_01015,United Kingdom
+CUST_01016,Japan
+CUST_01017,United States
+CUST_01018,Germany
+CUST_01019,Canada
+CUST_01020,United States
+CUST_01021,United States
+CUST_01022,Germany
+CUST_01023,United Kingdom
+CUST_01024,United Kingdom
+CUST_01025,United States
+CUST_01026,United States
+CUST_01027,United States
+CUST_01028,Australia
+CUST_01029,United States
+CUST_01030,United Kingdom
+CUST_01031,Germany
+CUST_01032,Canada
+CUST_01033,United Kingdom
+CUST_01034,United States
+CUST_01035,United States
+CUST_01036,United Kingdom
+CUST_01037,United Kingdom
+CUST_01038,United States
+CUST_01039,United States
+CUST_01040,United States
+CUST_01041,Australia
+CUST_01042,France
+CUST_01043,United States
+CUST_01044,Germany
+CUST_01045,United States
+CUST_01046,France
+CUST_01047,United States
+CUST_01048,United Kingdom
+CUST_01049,United States
+CUST_01050,United States
+CUST_01051,Germany
+CUST_01053,United States
+CUST_01054,United States
+CUST_01055,United States
+CUST_01056,United States
+CUST_01057,Japan
+CUST_01058,United Kingdom
+CUST_01059,United Kingdom
+CUST_01060,United States
+CUST_01061,United States
+CUST_01062,United States
+CUST_01063,Germany
+CUST_01064,United Kingdom
+CUST_01065,United States
+CUST_01066,United Kingdom
+CUST_01067,Japan
+CUST_01068,United Kingdom
+CUST_01069,United Kingdom
+CUST_01070,France
+CUST_01072,United States
+CUST_01073,Canada
+CUST_01074,United States
+CUST_01076,Germany
+CUST_01077,France
+CUST_01078,France
+CUST_01079,United Kingdom
+CUST_01080,United States
+CUST_01081,United States
+CUST_01082,United Kingdom
+CUST_01083,Germany
+CUST_01084,France
+CUST_01085,United States
+CUST_01086,United States
+CUST_01088,United Kingdom
+CUST_01089,United States
+CUST_01090,United States
+CUST_01091,United States
+CUST_01092,United States
+CUST_01093,Canada
+CUST_01094,United Kingdom
+CUST_01095,United Kingdom
+CUST_01096,United Kingdom
+CUST_01097,Canada
+CUST_01098,Australia
+CUST_01099,France
+CUST_01100,United States
+CUST_01101,Canada
+CUST_01102,United Kingdom
+CUST_01103,Australia
+CUST_01104,United States
+CUST_01105,United States
+CUST_01106,Australia
+CUST_01107,Germany
+CUST_01108,United States
+CUST_01109,Japan
+CUST_01110,United States
+CUST_01111,United States
+CUST_01112,Canada
+CUST_01113,Canada
+CUST_01114,United Kingdom
+CUST_01115,United States
+CUST_01116,United Kingdom
+CUST_01117,United States
+CUST_01118,France
+CUST_01120,France
+CUST_01121,United States
+CUST_01122,United States
+CUST_01123,United States
+CUST_01124,France
+CUST_01125,United Kingdom
+CUST_01126,Japan
+CUST_01127,Germany
+CUST_01128,United Kingdom
+CUST_01129,Germany
+CUST_01130,United States
+CUST_01131,United Kingdom
+CUST_01132,United States
+CUST_01133,United States
+CUST_01134,United States
+CUST_01135,United States
+CUST_01136,Germany
+CUST_01137,United Kingdom
+CUST_01138,United States
+CUST_01139,United States
+CUST_01140,Australia
+CUST_01141,United States
+CUST_01142,United States
+CUST_01143,France
+CUST_01144,United States
+CUST_01145,United States
+CUST_01146,United States
+CUST_01147,United States
+CUST_01148,United States
+CUST_01149,United States
+CUST_01150,France
+CUST_01151,Japan
+CUST_01152,United States
+CUST_01153,United Kingdom
+CUST_01154,Germany
+CUST_01155,Germany
+CUST_01156,United States
+CUST_01157,Australia
+CUST_01158,United States
+CUST_01159,United States
+CUST_01160,Germany
+CUST_01161,United States
+CUST_01162,United States
+CUST_01163,United States
+CUST_01164,United States
+CUST_01165,United Kingdom
+CUST_01166,United States
+CUST_01167,United Kingdom
+CUST_01168,United States
+CUST_01169,United States
+CUST_01170,United States
+CUST_01171,United States
+CUST_01172,United States
+CUST_01173,France
+CUST_01174,United States
+CUST_01175,Australia
+CUST_01176,United States
+CUST_01177,United Kingdom
+CUST_01178,Germany
+CUST_01179,Germany
+CUST_01180,Germany
+CUST_01181,France
+CUST_01182,United States
+CUST_01183,United States
+CUST_01184,United Kingdom
+CUST_01185,France
+CUST_01186,Canada
+CUST_01187,United Kingdom
+CUST_01188,Germany
+CUST_01189,United States
+CUST_01190,Canada
+CUST_01191,United States
+CUST_01192,United States
+CUST_01193,United States
+CUST_01194,Germany
+CUST_01196,Germany
+CUST_01197,United States
+CUST_01198,United States
+CUST_01199,Canada
+CUST_01200,United Kingdom
+CUST_01201,United Kingdom
+CUST_01202,United States
+CUST_01203,United States
+CUST_01204,Australia
+CUST_01205,United States
+CUST_01206,Canada
+CUST_01207,United States
+CUST_01208,France
+CUST_01209,United States
+CUST_01210,United States
+CUST_01211,United Kingdom
+CUST_01212,United Kingdom
+CUST_01213,United Kingdom
+CUST_01214,United States
+CUST_01215,United Kingdom
+CUST_01216,Germany
+CUST_01217,United States
+CUST_01218,United States
+CUST_01219,Canada
+CUST_01220,United States
+CUST_01221,Canada
+CUST_01222,United States
+CUST_01223,Japan
+CUST_01224,Germany
+CUST_01225,Germany
+CUST_01226,Australia
+CUST_01227,France
+CUST_01228,United States
+CUST_01229,United States
+CUST_01230,France
+CUST_01231,United States
+CUST_01232,Germany
+CUST_01234,United Kingdom
+CUST_01235,United States
+CUST_01236,France
+CUST_01237,United States
+CUST_01238,United States
+CUST_01239,Japan
+CUST_01240,United States
+CUST_01241,United States
+CUST_01242,Germany
+CUST_01243,United Kingdom
+CUST_01244,United States
+CUST_01245,United States
+CUST_01246,Germany
+CUST_01247,United States
+CUST_01248,Canada
+CUST_01249,Australia
+CUST_01250,United States
+CUST_01251,United States
+CUST_01252,Australia
+CUST_01253,United Kingdom
+CUST_01254,United States
+CUST_01255,United Kingdom
+CUST_01256,Germany
+CUST_01257,United States
+CUST_01258,Australia
+CUST_01259,United Kingdom
+CUST_01260,United States
+CUST_01261,United Kingdom
+CUST_01262,United States
+CUST_01263,Canada
+CUST_01264,United States
+CUST_01265,United States
+CUST_01266,United States
+CUST_01267,United States
+CUST_01268,Australia
+CUST_01269,France
+CUST_01270,United States
+CUST_01271,United States
+CUST_01272,United States
+CUST_01273,United Kingdom
+CUST_01274,United States
+CUST_01275,Germany
+CUST_01276,United Kingdom
+CUST_01278,United Kingdom
+CUST_01279,Canada
+CUST_01280,Germany
+CUST_01281,Germany
+CUST_01282,Germany
+CUST_01283,United Kingdom
+CUST_01284,United Kingdom
+CUST_01285,United Kingdom
+CUST_01286,Germany
+CUST_01287,United States
+CUST_01288,Germany
+CUST_01289,United States
+CUST_01290,United States
+CUST_01291,Japan
+CUST_01292,Canada
+CUST_01293,Canada
+CUST_01294,Australia
+CUST_01295,United States
+CUST_01296,France
+CUST_01297,France
+CUST_01298,France
+CUST_01299,United States
+CUST_01300,United States
+CUST_01301,Canada
+CUST_01302,United States
+CUST_01303,United States
+CUST_01304,United States
+CUST_01305,United States
+CUST_01306,France
+CUST_01307,United Kingdom
+CUST_01308,United Kingdom
+CUST_01309,United Kingdom
+CUST_01310,Canada
+CUST_01311,United States
+CUST_01312,United States
+CUST_01313,United States
+CUST_01314,Germany
+CUST_01315,Canada
+CUST_01316,France
+CUST_01317,United Kingdom
+CUST_01318,United States
+CUST_01319,United Kingdom
+CUST_01320,United Kingdom
+CUST_01321,United States
+CUST_01322,United States
+CUST_01323,Germany
+CUST_01324,United States
+CUST_01325,France
+CUST_01326,United States
+CUST_01327,United States
+CUST_01328,Germany
+CUST_01329,Australia
+CUST_01330,United States
+CUST_01331,United Kingdom
+CUST_01333,France
+CUST_01334,United Kingdom
+CUST_01335,United States
+CUST_01336,United Kingdom
+CUST_01337,Germany
+CUST_01338,United Kingdom
+CUST_01339,Germany
+CUST_01340,United Kingdom
+CUST_01341,United States
+CUST_01342,United Kingdom
+CUST_01343,United States
+CUST_01344,United States
+CUST_01345,United Kingdom
+CUST_01346,United States
+CUST_01347,Japan
+CUST_01348,United Kingdom
+CUST_01349,United States
+CUST_01350,United Kingdom
+CUST_01351,United Kingdom
+CUST_01352,Germany
+CUST_01353,United States
+CUST_01354,Canada
+CUST_01355,Japan
+CUST_01356,United States
+CUST_01357,Japan
+CUST_01358,Canada
+CUST_01359,United States
+CUST_01360,United States
+CUST_01361,Australia
+CUST_01362,Germany
+CUST_01363,United States
+CUST_01364,United States
+CUST_01365,United States
+CUST_01366,United States
+CUST_01367,Japan
+CUST_01369,United Kingdom
+CUST_01370,France
+CUST_01371,United Kingdom
+CUST_01372,Australia
+CUST_01373,France
+CUST_01374,Australia
+CUST_01375,United States
+CUST_01376,United States
+CUST_01377,Germany
+CUST_01379,United Kingdom
+CUST_01380,United Kingdom
+CUST_01381,United States
+CUST_01382,United Kingdom
+CUST_01383,United States
+CUST_01384,United States
+CUST_01385,United States
+CUST_01386,United Kingdom
+CUST_01387,Germany
+CUST_01388,United States
+CUST_01389,United States
+CUST_01390,United Kingdom
+CUST_01391,United Kingdom
+CUST_01392,United States
+CUST_01393,Germany
+CUST_01394,France
+CUST_01395,United States
+CUST_01396,France
+CUST_01397,France
+CUST_01398,France
+CUST_01399,Germany
+CUST_01400,Germany
+CUST_01401,United Kingdom
+CUST_01402,United States
+CUST_01403,United Kingdom
+CUST_01404,Germany
+CUST_01405,United Kingdom
+CUST_01406,United States
+CUST_01407,United States
+CUST_01408,Germany
+CUST_01409,Japan
+CUST_01410,Germany
+CUST_01411,United States
+CUST_01412,Canada
+CUST_01413,United Kingdom
+CUST_01414,United Kingdom
+CUST_01415,Canada
+CUST_01417,Canada
+CUST_01418,United Kingdom
+CUST_01419,Germany
+CUST_01420,United Kingdom
+CUST_01421,Germany
+CUST_01423,Canada
+CUST_01424,United Kingdom
+CUST_01425,United States
+CUST_01426,Australia
+CUST_01427,United States
+CUST_01428,United States
+CUST_01429,United States
+CUST_01430,United States
+CUST_01431,Germany
+CUST_01432,United States
+CUST_01433,France
+CUST_01434,United Kingdom
+CUST_01435,United States
+CUST_01436,Canada
+CUST_01437,United States
+CUST_01438,United Kingdom
+CUST_01439,Germany
+CUST_01440,United States
+CUST_01441,United Kingdom
+CUST_01442,United States
+CUST_01443,United Kingdom
+CUST_01444,United States
+CUST_01445,Japan
+CUST_01446,Germany
+CUST_01447,United States
+CUST_01448,United States
+CUST_01449,United States
+CUST_01450,United States
+CUST_01451,United States
+CUST_01452,United States
+CUST_01453,United Kingdom
+CUST_01454,Canada
+CUST_01455,United States
+CUST_01456,Japan
+CUST_01457,United States
+CUST_01458,France
+CUST_01459,United Kingdom
+CUST_01460,United States
+CUST_01461,United States
+CUST_01462,Germany
+CUST_01463,United States
+CUST_01464,United Kingdom
+CUST_01465,United States
+CUST_01466,United Kingdom
+CUST_01467,United States
+CUST_01468,United States
+CUST_01469,United States
+CUST_01470,United Kingdom
+CUST_01471,United Kingdom
+CUST_01472,United States
+CUST_01473,United States
+CUST_01475,United Kingdom
+CUST_01476,United States
+CUST_01477,United States
+CUST_01478,United States
+CUST_01479,United States
+CUST_01480,United States
+CUST_01481,Germany
+CUST_01482,Canada
+CUST_01483,United States
+CUST_01484,Canada
+CUST_01485,United States
+CUST_01486,France
+CUST_01487,United Kingdom
+CUST_01488,United Kingdom
+CUST_01489,United States
+CUST_01490,Australia
+CUST_01491,United States
+CUST_01492,Germany
+CUST_01494,Australia
+CUST_01495,United States
+CUST_01496,United States
+CUST_01497,Germany
+CUST_01499,United Kingdom
+CUST_01500,France
+CUST_01501,United States
+CUST_01502,United States
+CUST_01503,United Kingdom
+CUST_01504,France
+CUST_01505,France
+CUST_01506,United States
+CUST_01507,United States
+CUST_01508,Canada
+CUST_01509,United Kingdom
+CUST_01510,Australia
+CUST_01511,Canada
+CUST_01512,France
+CUST_01513,Germany
+CUST_01514,United States
+CUST_01516,United States
+CUST_01517,United Kingdom
+CUST_01518,United Kingdom
+CUST_01519,United States
+CUST_01520,Australia
+CUST_01521,United States
+CUST_01522,Germany
+CUST_01523,Germany
+CUST_01525,United Kingdom
+CUST_01526,United States
+CUST_01527,United States
+CUST_01528,France
+CUST_01529,United Kingdom
+CUST_01530,Australia
+CUST_01531,United States
+CUST_01532,United States
+CUST_01533,United Kingdom
+CUST_01534,United States
+CUST_01535,Australia
+CUST_01536,France
+CUST_01537,United Kingdom
+CUST_01538,United States
+CUST_01539,United Kingdom
+CUST_01540,United States
+CUST_01541,United States
+CUST_01542,Germany
+CUST_01543,Japan
+CUST_01545,United Kingdom
+CUST_01546,United States
+CUST_01547,United Kingdom
+CUST_01548,France
+CUST_01549,United States
+CUST_01552,Germany
+CUST_01553,United States
+CUST_01554,Germany
+CUST_01555,United States
+CUST_01556,Germany
+CUST_01557,Canada
+CUST_01558,France
+CUST_01559,France
+CUST_01560,United States
+CUST_01561,United States
+CUST_01562,Japan
+CUST_01563,United States
+CUST_01564,Canada
+CUST_01565,United States
+CUST_01566,United Kingdom
+CUST_01567,United States
+CUST_01568,United States
+CUST_01569,United Kingdom
+CUST_01570,Germany
+CUST_01571,United States
+CUST_01572,United Kingdom
+CUST_01573,Japan
+CUST_01574,United Kingdom
+CUST_01575,United Kingdom
+CUST_01576,Australia
+CUST_01577,Germany
+CUST_01578,United States
+CUST_01579,United States
+CUST_01580,Canada
+CUST_01581,Germany
+CUST_01582,Germany
+CUST_01583,United Kingdom
+CUST_01584,United States
+CUST_01585,Canada
+CUST_01586,United States
+CUST_01587,United States
+CUST_01588,Canada
+CUST_01589,United Kingdom
+CUST_01590,Australia
+CUST_01591,United Kingdom
+CUST_01592,France
+CUST_01593,Germany
+CUST_01594,Germany
+CUST_01595,United Kingdom
+CUST_01596,United States
+CUST_01597,United States
+CUST_01598,United States
+CUST_01599,France
+CUST_01600,United States
+CUST_01601,United States
+CUST_01602,United States
+CUST_01603,United States
+CUST_01604,Canada
+CUST_01605,United States
+CUST_01606,United Kingdom
+CUST_01607,Canada
+CUST_01608,United States
+CUST_01609,United States
+CUST_01610,United States
+CUST_01611,United Kingdom
+CUST_01612,Australia
+CUST_01613,United States
+CUST_01614,United States
+CUST_01615,United States
+CUST_01616,United States
+CUST_01617,Germany
+CUST_01618,United States
+CUST_01619,United Kingdom
+CUST_01620,United Kingdom
+CUST_01621,France
+CUST_01622,United Kingdom
+CUST_01623,Canada
+CUST_01624,France
+CUST_01626,United States
+CUST_01627,United States
+CUST_01628,United States
+CUST_01629,United States
+CUST_01630,Germany
+CUST_01631,United States
+CUST_01632,United Kingdom
+CUST_01633,United States
+CUST_01634,Germany
+CUST_01635,Germany
+CUST_01636,United States
+CUST_01637,United States
+CUST_01638,United States
+CUST_01639,United States
+CUST_01640,United Kingdom
+CUST_01641,United Kingdom
+CUST_01642,Canada
+CUST_01643,Australia
+CUST_01644,United States
+CUST_01645,Canada
+CUST_01646,United Kingdom
+CUST_01647,United States
+CUST_01648,United Kingdom
+CUST_01649,Germany
+CUST_01650,United Kingdom
+CUST_01651,United Kingdom
+CUST_01652,France
+CUST_01653,France
+CUST_01654,United States
+CUST_01655,United Kingdom
+CUST_01656,United States
+CUST_01657,United States
+CUST_01658,United States
+CUST_01659,United States
+CUST_01660,United States
+CUST_01661,United States
+CUST_01662,United Kingdom
+CUST_01664,United Kingdom
+CUST_01665,United Kingdom
+CUST_01666,United States
+CUST_01668,United Kingdom
+CUST_01669,Germany
+CUST_01670,United Kingdom
+CUST_01672,Germany
+CUST_01673,United Kingdom
+CUST_01674,United States
+CUST_01675,United States
+CUST_01676,France
+CUST_01677,United States
+CUST_01678,United States
+CUST_01679,United States
+CUST_01680,United Kingdom
+CUST_01681,Australia
+CUST_01682,United States
+CUST_01683,Australia
+CUST_01684,Canada
+CUST_01685,United Kingdom
+CUST_01686,United States
+CUST_01687,United Kingdom
+CUST_01688,Japan
+CUST_01689,United States
+CUST_01690,United States
+CUST_01691,United Kingdom
+CUST_01692,Germany
+CUST_01693,United States
+CUST_01694,United Kingdom
+CUST_01695,United States
+CUST_01696,Germany
+CUST_01698,Australia
+CUST_01699,United States
+CUST_01700,United Kingdom
+CUST_01701,United States
+CUST_01702,United States
+CUST_01703,United States
+CUST_01704,United States
+CUST_01705,Germany
+CUST_01706,United States
+CUST_01707,Canada
+CUST_01708,United States
+CUST_01709,United Kingdom
+CUST_01710,United Kingdom
+CUST_01711,United States
+CUST_01712,France
+CUST_01713,Germany
+CUST_01714,United States
+CUST_01715,United States
+CUST_01716,United States
+CUST_01717,United Kingdom
+CUST_01718,United States
+CUST_01719,Canada
+CUST_01720,United Kingdom
+CUST_01721,Australia
+CUST_01722,Japan
+CUST_01724,United Kingdom
+CUST_01725,United States
+CUST_01726,United States
+CUST_01727,France
+CUST_01728,United Kingdom
+CUST_01730,United States
+CUST_01731,United States
+CUST_01733,Canada
+CUST_01734,Canada
+CUST_01735,United States
+CUST_01736,Germany
+CUST_01737,United Kingdom
+CUST_01738,United States
+CUST_01739,United States
+CUST_01740,United Kingdom
+CUST_01741,Germany
+CUST_01742,Canada
+CUST_01743,Germany
+CUST_01744,United States
+CUST_01745,United States
+CUST_01746,Germany
+CUST_01747,United States
+CUST_01748,Germany
+CUST_01750,France
+CUST_01751,United States
+CUST_01752,United States
+CUST_01753,Japan
+CUST_01754,United Kingdom
+CUST_01756,Australia
+CUST_01757,United Kingdom
+CUST_01758,United Kingdom
+CUST_01759,United States
+CUST_01760,United States
+CUST_01761,United Kingdom
+CUST_01762,Germany
+CUST_01763,United States
+CUST_01764,Germany
+CUST_01765,United States
+CUST_01766,United States
+CUST_01767,United States
+CUST_01768,United States
+CUST_01769,United States
+CUST_01770,France
+CUST_01771,United States
+CUST_01772,United States
+CUST_01773,United States
+CUST_01774,United States
+CUST_01775,United Kingdom
+CUST_01776,United Kingdom
+CUST_01777,United Kingdom
+CUST_01778,United States
+CUST_01779,United States
+CUST_01780,France
+CUST_01781,Japan
+CUST_01782,United States
+CUST_01783,United States
+CUST_01784,United States
+CUST_01785,United States
+CUST_01786,United States
+CUST_01787,United Kingdom
+CUST_01788,France
+CUST_01789,United States
+CUST_01790,United States
+CUST_01791,United States
+CUST_01792,United States
+CUST_01793,United Kingdom
+CUST_01794,United Kingdom
+CUST_01795,Germany
+CUST_01796,France
+CUST_01797,United States
+CUST_01798,Canada
+CUST_01799,Germany
+CUST_01800,United Kingdom
+CUST_01801,France
+CUST_01802,Australia
+CUST_01803,Japan
+CUST_01804,United Kingdom
+CUST_01805,United States
+CUST_01806,United States
+CUST_01807,United States
+CUST_01808,United States
+CUST_01809,Germany
+CUST_01810,Canada
+CUST_01811,Germany
+CUST_01812,United States
+CUST_01813,United States
+CUST_01814,United States
+CUST_01815,Germany
+CUST_01816,United States
+CUST_01817,Germany
+CUST_01818,Canada
+CUST_01819,United Kingdom
+CUST_01820,United States
+CUST_01821,Canada
+CUST_01822,United States
+CUST_01823,Germany
+CUST_01824,United States
+CUST_01825,United States
+CUST_01826,Canada
+CUST_01827,United States
+CUST_01828,United Kingdom
+CUST_01829,United States
+CUST_01830,United States
+CUST_01831,United States
+CUST_01832,United States
+CUST_01833,United States
+CUST_01834,United Kingdom
+CUST_01836,United States
+CUST_01837,Japan
+CUST_01838,United States
+CUST_01839,United Kingdom
+CUST_01840,Australia
+CUST_01841,France
+CUST_01842,United States
+CUST_01843,United States
+CUST_01844,Germany
+CUST_01845,United States
+CUST_01846,United Kingdom
+CUST_01847,United States
+CUST_01848,United States
+CUST_01849,United Kingdom
+CUST_01850,Canada
+CUST_01851,Germany
+CUST_01852,United States
+CUST_01853,Australia
+CUST_01854,Australia
+CUST_01855,United States
+CUST_01856,United States
+CUST_01857,Germany
+CUST_01858,United Kingdom
+CUST_01859,Canada
+CUST_01860,United States
+CUST_01861,Germany
+CUST_01862,United States
+CUST_01863,Germany
+CUST_01864,United States
+CUST_01865,Australia
+CUST_01866,United Kingdom
+CUST_01867,United States
+CUST_01868,France
+CUST_01869,Australia
+CUST_01870,Germany
+CUST_01871,United States
+CUST_01872,Australia
+CUST_01873,Canada
+CUST_01874,Germany
+CUST_01875,United States
+CUST_01876,United States
+CUST_01877,Germany
+CUST_01878,United States
+CUST_01879,United States
+CUST_01880,United States
+CUST_01881,United Kingdom
+CUST_01882,France
+CUST_01883,United States
+CUST_01884,United States
+CUST_01885,Germany
+CUST_01886,Canada
+CUST_01887,United States
+CUST_01888,United States
+CUST_01889,United States
+CUST_01890,United States
+CUST_01891,United States
+CUST_01892,United States
+CUST_01893,Canada
+CUST_01894,France
+CUST_01895,United States
+CUST_01896,Canada
+CUST_01897,Canada
+CUST_01898,United States
+CUST_01899,United States
+CUST_01900,France
+CUST_01901,Canada
+CUST_01902,United Kingdom
+CUST_01903,United States
+CUST_01904,United States
+CUST_01905,United States
+CUST_01906,United Kingdom
+CUST_01907,United States
+CUST_01908,United States
+CUST_01909,United States
+CUST_01910,Germany
+CUST_01911,United States
+CUST_01912,United States
+CUST_01914,United States
+CUST_01915,United States
+CUST_01917,United States
+CUST_01919,United Kingdom
+CUST_01920,United States
+CUST_01921,United Kingdom
+CUST_01922,United Kingdom
+CUST_01923,United Kingdom
+CUST_01924,Japan
+CUST_01925,United Kingdom
+CUST_01926,United Kingdom
+CUST_01927,United States
+CUST_01928,Canada
+CUST_01929,Germany
+CUST_01931,United Kingdom
+CUST_01932,United Kingdom
+CUST_01933,United States
+CUST_01934,United States
+CUST_01935,United Kingdom
+CUST_01936,France
+CUST_01937,United Kingdom
+CUST_01938,Canada
+CUST_01939,Germany
+CUST_01940,United States
+CUST_01941,United States
+CUST_01942,United States
+CUST_01943,France
+CUST_01944,France
+CUST_01945,United Kingdom
+CUST_01946,United States
+CUST_01947,United States
+CUST_01949,Germany
+CUST_01950,Canada
+CUST_01951,United States
+CUST_01952,United States
+CUST_01953,United Kingdom
+CUST_01954,United Kingdom
+CUST_01955,United Kingdom
+CUST_01956,United Kingdom
+CUST_01957,France
+CUST_01958,Japan
+CUST_01959,United States
+CUST_01960,United States
+CUST_01961,United States
+CUST_01962,United States
+CUST_01963,United Kingdom
+CUST_01964,Australia
+CUST_01965,France
+CUST_01966,United Kingdom
+CUST_01967,France
+CUST_01968,United Kingdom
+CUST_01969,United States
+CUST_01970,United States
+CUST_01971,United Kingdom
+CUST_01972,Japan
+CUST_01973,United States
+CUST_01974,United States
+CUST_01975,Germany
+CUST_01976,United States
+CUST_01977,United States
+CUST_01978,United States
+CUST_01979,United Kingdom
+CUST_01980,Canada
+CUST_01981,Canada
+CUST_01982,United States
+CUST_01984,United States
+CUST_01985,Canada
+CUST_01986,United States
+CUST_01987,United States
+CUST_01988,United Kingdom
+CUST_01989,United Kingdom
+CUST_01990,United Kingdom
+CUST_01991,United States
+CUST_01992,United States
+CUST_01993,Canada
+CUST_01994,United States
+CUST_01995,United States
+CUST_01996,United States
+CUST_01997,United Kingdom
+CUST_01998,Germany
+CUST_01999,United Kingdom
+CUST_02000,United States
+CUST_02001,United Kingdom
+CUST_02002,United States
+CUST_02003,United States
+CUST_02004,United Kingdom
+CUST_02005,Australia
+CUST_02006,Japan
+CUST_02008,Germany
+CUST_02009,United States
+CUST_02010,United States
+CUST_02011,United Kingdom
+CUST_02012,France
+CUST_02013,Canada
+CUST_02014,Germany
+CUST_02015,United Kingdom
+CUST_02016,United States
+CUST_02017,France
+CUST_02018,United States
+CUST_02019,Canada
+CUST_02020,United States
+CUST_02021,France
+CUST_02022,Canada
+CUST_02023,United States
+CUST_02024,Germany
+CUST_02025,United Kingdom
+CUST_02026,United Kingdom
+CUST_02027,United Kingdom
+CUST_02028,Australia
+CUST_02029,United Kingdom
+CUST_02030,Australia
+CUST_02031,United States
+CUST_02033,United States
+CUST_02034,Germany
+CUST_02035,Canada
+CUST_02036,United States
+CUST_02037,France
+CUST_02038,United States
+CUST_02039,Germany
+CUST_02040,United Kingdom
+CUST_02041,Germany
+CUST_02042,United States
+CUST_02043,Japan
+CUST_02044,United Kingdom
+CUST_02045,United States
+CUST_02046,United States
+CUST_02047,France
+CUST_02048,United States
+CUST_02049,United States
+CUST_02050,France
+CUST_02051,United Kingdom
+CUST_02052,United States
+CUST_02053,United States
+CUST_02055,Germany
+CUST_02056,France
+CUST_02057,Australia
+CUST_02058,United States
+CUST_02059,United Kingdom
+CUST_02060,Australia
+CUST_02061,United States
+CUST_02062,United States
+CUST_02063,United Kingdom
+CUST_02064,France
+CUST_02066,United States
+CUST_02067,United Kingdom
+CUST_02068,United States
+CUST_02069,United Kingdom
+CUST_02070,Germany
+CUST_02071,United States
+CUST_02072,United States
+CUST_02073,Japan
+CUST_02074,United States
+CUST_02076,United States
+CUST_02077,Germany
+CUST_02078,United Kingdom
+CUST_02079,United Kingdom
+CUST_02080,United States
+CUST_02081,United States
+CUST_02082,Japan
+CUST_02083,United Kingdom
+CUST_02084,United Kingdom
+CUST_02086,United States
+CUST_02087,United States
+CUST_02088,United Kingdom
+CUST_02089,Canada
+CUST_02090,United States
+CUST_02091,United States
+CUST_02093,United States
+CUST_02094,Canada
+CUST_02095,United States
+CUST_02096,Australia
+CUST_02097,United States
+CUST_02098,United Kingdom
+CUST_02099,France
+CUST_02100,Canada
+CUST_02101,United Kingdom
+CUST_02102,United Kingdom
+CUST_02103,United Kingdom
+CUST_02104,United States
+CUST_02105,United Kingdom
+CUST_02106,United States
+CUST_02107,United Kingdom
+CUST_02108,Germany
+CUST_02109,United States
+CUST_02110,United States
+CUST_02111,United Kingdom
+CUST_02112,United Kingdom
+CUST_02113,Australia
+CUST_02114,United States
+CUST_02115,Japan
+CUST_02116,United States
+CUST_02117,United Kingdom
+CUST_02118,United Kingdom
+CUST_02119,United Kingdom
+CUST_02120,United States
+CUST_02121,Germany
+CUST_02122,France
+CUST_02123,France
+CUST_02124,United Kingdom
+CUST_02125,Germany
+CUST_02126,Germany
+CUST_02127,France
+CUST_02128,France
+CUST_02129,United States
+CUST_02130,United Kingdom
+CUST_02131,United States
+CUST_02132,United States
+CUST_02133,United States
+CUST_02134,United States
+CUST_02135,United Kingdom
+CUST_02136,United Kingdom
+CUST_02137,Japan
+CUST_02138,Canada
+CUST_02139,Canada
+CUST_02140,Germany
+CUST_02141,United States
+CUST_02142,Australia
+CUST_02143,Australia
+CUST_02144,United States
+CUST_02145,United States
+CUST_02146,Australia
+CUST_02147,France
+CUST_02148,United States
+CUST_02149,United States
+CUST_02150,United States
+CUST_02151,United Kingdom
+CUST_02152,United States
+CUST_02153,United Kingdom
+CUST_02154,United Kingdom
+CUST_02155,United States
+CUST_02156,Germany
+CUST_02157,United Kingdom
+CUST_02158,Canada
+CUST_02159,Japan
+CUST_02160,United Kingdom
+CUST_02161,Australia
+CUST_02162,United Kingdom
+CUST_02164,United States
+CUST_02165,United States
+CUST_02166,Canada
+CUST_02167,United States
+CUST_02168,United States
+CUST_02169,United States
+CUST_02170,United Kingdom
+CUST_02171,United States
+CUST_02172,United Kingdom
+CUST_02173,United States
+CUST_02174,United States
+CUST_02175,United States
+CUST_02176,United States
+CUST_02178,United Kingdom
+CUST_02179,France
+CUST_02181,United Kingdom
+CUST_02182,United States
+CUST_02183,United Kingdom
+CUST_02184,United States
+CUST_02185,United States
+CUST_02186,United Kingdom
+CUST_02187,Canada
+CUST_02188,United States
+CUST_02189,United States
+CUST_02190,United States
+CUST_02191,United States
+CUST_02192,Germany
+CUST_02193,United States
+CUST_02194,United States
+CUST_02195,Germany
+CUST_02196,United Kingdom
+CUST_02197,United States
+CUST_02198,France
+CUST_02199,United States
+CUST_02200,United States
+CUST_02201,United States
+CUST_02202,Australia
+CUST_02203,France
+CUST_02204,United States
+CUST_02205,United Kingdom
+CUST_02206,United States
+CUST_02207,United States
+CUST_02208,United States
+CUST_02209,Germany
+CUST_02210,Canada
+CUST_02211,United States
+CUST_02212,France
+CUST_02213,United States
+CUST_02215,United States
+CUST_02216,Canada
+CUST_02217,United Kingdom
+CUST_02218,France
+CUST_02219,United Kingdom
+CUST_02220,United States
+CUST_02221,Australia
+CUST_02222,France
+CUST_02224,United States
+CUST_02225,Germany
+CUST_02226,United Kingdom
+CUST_02227,Japan
+CUST_02228,United States
+CUST_02229,United States
+CUST_02230,United States
+CUST_02231,United States
+CUST_02232,Canada
+CUST_02233,Germany
+CUST_02234,United States
+CUST_02235,Germany
+CUST_02236,United States
+CUST_02237,United States
+CUST_02238,United States
+CUST_02239,Germany
+CUST_02240,Germany
+CUST_02241,United States
+CUST_02242,United Kingdom
+CUST_02243,United States
+CUST_02244,United States
+CUST_02245,Germany
+CUST_02246,Canada
+CUST_02247,United States
+CUST_02248,United Kingdom
+CUST_02249,France
+CUST_02250,Germany
+CUST_02251,United States
+CUST_02252,United States
+CUST_02253,France
+CUST_02254,United States
+CUST_02255,United States
+CUST_02256,Germany
+CUST_02257,United States
+CUST_02258,United States
+CUST_02259,Canada
+CUST_02260,United Kingdom
+CUST_02261,United Kingdom
+CUST_02262,United Kingdom
+CUST_02263,United States
+CUST_02264,United States
+CUST_02265,United States
+CUST_02266,United States
+CUST_02267,United States
+CUST_02268,Canada
+CUST_02269,Germany
+CUST_02270,United States
+CUST_02271,United Kingdom
+CUST_02272,Australia
+CUST_02273,United States
+CUST_02274,France
+CUST_02275,United Kingdom
+CUST_02277,Australia
+CUST_02278,United Kingdom
+CUST_02279,Australia
+CUST_02280,United Kingdom
+CUST_02281,United Kingdom
+CUST_02282,United States
+CUST_02283,United States
+CUST_02284,France
+CUST_02285,United States
+CUST_02286,Germany
+CUST_02287,United Kingdom
+CUST_02288,United Kingdom
+CUST_02289,United States
+CUST_02290,United States
+CUST_02291,France
+CUST_02292,United States
+CUST_02293,France
+CUST_02294,Canada
+CUST_02295,United Kingdom
+CUST_02296,United States
+CUST_02297,Australia
+CUST_02298,United States
+CUST_02299,France
+CUST_02300,United States
+CUST_02301,United States
+CUST_02302,Canada
+CUST_02303,United States
+CUST_02304,Germany
+CUST_02305,France
+CUST_02306,United Kingdom
+CUST_02307,United States
+CUST_02308,Germany
+CUST_02309,France
+CUST_02310,United Kingdom
+CUST_02311,United Kingdom
+CUST_02312,United States
+CUST_02313,United States
+CUST_02315,United States
+CUST_02316,United States
+CUST_02317,United States
+CUST_02318,Germany
+CUST_02319,United Kingdom
+CUST_02320,France
+CUST_02321,United States
+CUST_02322,United States
+CUST_02323,United States
+CUST_02324,United States
+CUST_02325,France
+CUST_02326,United States
+CUST_02327,United States
+CUST_02328,United Kingdom
+CUST_02329,United Kingdom
+CUST_02330,Australia
+CUST_02331,United States
+CUST_02332,United States
+CUST_02333,United Kingdom
+CUST_02334,United Kingdom
+CUST_02335,Australia
+CUST_02336,United States
+CUST_02337,United Kingdom
+CUST_02338,Germany
+CUST_02339,United States
+CUST_02340,France
+CUST_02341,United Kingdom
+CUST_02342,United Kingdom
+CUST_02343,United States
+CUST_02344,United States
+CUST_02345,France
+CUST_02346,Australia
+CUST_02347,United Kingdom
+CUST_02348,United Kingdom
+CUST_02350,United States
+CUST_02351,United Kingdom
+CUST_02352,Australia
+CUST_02353,United Kingdom
+CUST_02354,United States
+CUST_02355,Germany
+CUST_02356,France
+CUST_02357,France
+CUST_02358,Canada
+CUST_02359,United Kingdom
+CUST_02360,United States
+CUST_02361,Canada
+CUST_02362,United States
+CUST_02363,Germany
+CUST_02364,United States
+CUST_02365,Germany
+CUST_02366,United States
+CUST_02367,United States
+CUST_02368,United States
+CUST_02369,United States
+CUST_02370,United States
+CUST_02371,Germany
+CUST_02372,United States
+CUST_02374,Germany
+CUST_02375,United Kingdom
+CUST_02376,Germany
+CUST_02377,Australia
+CUST_02378,Australia
+CUST_02379,Germany
+CUST_02380,Germany
+CUST_02381,Germany
+CUST_02382,Germany
+CUST_02383,Germany
+CUST_02384,United States
+CUST_02385,United States
+CUST_02387,Australia
+CUST_02388,Japan
+CUST_02390,Germany
+CUST_02391,Australia
+CUST_02392,Germany
+CUST_02393,United States
+CUST_02394,United States
+CUST_02395,United States
+CUST_02396,Germany
+CUST_02397,Australia
+CUST_02398,United States
+CUST_02399,Germany
+CUST_02400,United States
+CUST_02401,Germany
+CUST_02402,United Kingdom
+CUST_02403,Canada
+CUST_02404,Australia
+CUST_02405,United Kingdom
+CUST_02406,Canada
+CUST_02407,Canada
+CUST_02408,United States
+CUST_02409,Japan
+CUST_02410,United States
+CUST_02411,Germany
+CUST_02412,United States
+CUST_02413,United Kingdom
+CUST_02414,Canada
+CUST_02415,United Kingdom
+CUST_02416,United Kingdom
+CUST_02417,United States
+CUST_02418,United States
+CUST_02419,United States
+CUST_02420,United States
+CUST_02421,France
+CUST_02422,United Kingdom
+CUST_02423,United States
+CUST_02424,Australia
+CUST_02425,Germany
+CUST_02426,United Kingdom
+CUST_02427,United Kingdom
+CUST_02428,Canada
+CUST_02429,France
+CUST_02430,United States
+CUST_02431,Australia
+CUST_02432,United States
+CUST_02433,United States
+CUST_02434,United States
+CUST_02435,United States
+CUST_02436,United Kingdom
+CUST_02437,Australia
+CUST_02438,France
+CUST_02439,United States
+CUST_02440,Australia
+CUST_02441,United States
+CUST_02442,Germany
+CUST_02443,France
+CUST_02444,United Kingdom
+CUST_02445,Canada
+CUST_02446,United States
+CUST_02447,Australia
+CUST_02448,United States
+CUST_02449,United States
+CUST_02450,United Kingdom
+CUST_02451,Germany
+CUST_02452,United Kingdom
+CUST_02453,United States
+CUST_02455,United States
+CUST_02456,United States
+CUST_02457,France
+CUST_02458,Canada
+CUST_02459,United States
+CUST_02460,United States
+CUST_02461,Canada
+CUST_02462,United Kingdom
+CUST_02463,United States
+CUST_02465,United Kingdom
+CUST_02466,United States
+CUST_02467,France
+CUST_02468,Germany
+CUST_02469,United States
+CUST_02470,United States
+CUST_02471,United States
+CUST_02472,Germany
+CUST_02473,France
+CUST_02474,United States
+CUST_02475,Germany
+CUST_02476,United States
+CUST_02477,Germany
+CUST_02478,United States
+CUST_02479,United States
+CUST_02480,United States
+CUST_02481,United States
+CUST_02482,United States
+CUST_02483,United States
+CUST_02484,United Kingdom
+CUST_02485,United States
+CUST_02486,United States
+CUST_02487,Japan
+CUST_02488,Australia
+CUST_02489,France
+CUST_02490,United States
+CUST_02491,United States
+CUST_02492,United Kingdom
+CUST_02493,United Kingdom
+CUST_02494,United States
+CUST_02495,United States
+CUST_02496,United Kingdom
+CUST_02497,United States
+CUST_02498,United Kingdom
+CUST_02499,Germany
+CUST_02500,United States

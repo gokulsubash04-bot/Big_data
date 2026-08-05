@@ -1,5 +1,23 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function ClickstreamFunnel({ data }) {
   const funnel = data.clickstream_funnel || {};
@@ -9,7 +27,7 @@ export default function ClickstreamFunnel({ data }) {
   const dropOffs = funnel.stage_drop_offs || {};
   const devices = funnel.device_breakdown || {};
 
-  const totalEv = Object.values(evCounts).reduce((a, b) => a + b, 0);
+  const totalEv = Object.values(evCounts).reduce((a, b) => a + Number(b), 0);
   const totalSess = sessCounts.total_sessions || sessCounts.view || 0;
 
   // Funnel Volume Chart Data
@@ -27,6 +45,7 @@ export default function ClickstreamFunnel({ data }) {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
       x: { ticks: { color: '#9ca3af', font: { family: 'Plus Jakarta Sans' } }, grid: { color: '#1f2937' } },
@@ -47,6 +66,7 @@ export default function ClickstreamFunnel({ data }) {
 
   const deviceChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: { legend: { labels: { color: '#d1d5db', font: { family: 'Plus Jakarta Sans' } } } },
     scales: {
       x: { ticks: { color: '#9ca3af', font: { family: 'Plus Jakarta Sans' } }, grid: { color: '#1f2937' } },

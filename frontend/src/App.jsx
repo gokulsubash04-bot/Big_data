@@ -20,22 +20,42 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8501/api/data';
+    const urlsToTry = [
+      'http://localhost:8501/api/data',
+      '/api/data'
+    ];
 
-    fetch(API_URL)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json();
-      })
-      .then((json) => {
-        setData(json);
+    let currentIdx = 0;
+
+    const tryFetch = () => {
+      if (currentIdx >= urlsToTry.length) {
+        setError('Backend server not responding on port 8501.');
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to load dashboard data:', err);
-        setError(err.message);
-        setLoading(false);
-      });
+        return;
+      }
+
+      const url = urlsToTry[currentIdx];
+      fetch(url)
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const contentType = res.headers.get('content-type') || '';
+          if (!contentType.includes('application/json')) {
+            throw new Error('Response is not JSON');
+          }
+          return res.json();
+        })
+        .then((json) => {
+          setData(json);
+          setLoading(false);
+          setError(null);
+        })
+        .catch(() => {
+          currentIdx++;
+          tryFetch();
+        });
+    };
+
+    tryFetch();
   }, []);
 
   return (
@@ -52,10 +72,18 @@ export default function App() {
             </div>
           ) : error ? (
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--rose)', borderRadius: '12px', padding: '24px', color: 'var(--rose)' }}>
-              <h3>⚠️ Unable to connect to Python Analytics API (port 8501)</h3>
-              <p style={{ marginTop: '8px', fontSize: '13px', color: 'var(--text-body)' }}>
-                Please make sure the Python server is running: <code>python app.py</code>
+              <h3 style={{ margin: 0, fontSize: '18px' }}>⚠️ Unable to Connect to Python Backend API Server</h3>
+              <p style={{ marginTop: '12px', fontSize: '14px', color: 'var(--text-body)', lineHeight: 1.6 }}>
+                The React frontend is running, but the Python backend server (<code>app.py</code>) is not running on port <strong>8501</strong>.
               </p>
+              <div style={{ marginTop: '16px', background: '#0f172a', padding: '16px', borderRadius: '8px', border: '1px solid var(--card-border)' }}>
+                <p style={{ margin: 0, fontWeight: 700, color: 'var(--cyan)', fontSize: '13px' }}>💡 How to Fix:</p>
+                <ol style={{ margin: '8px 0 0 20px', padding: 0, fontSize: '13px', color: 'var(--text-muted)' }}>
+                  <li>Open a new terminal window in the project folder.</li>
+                  <li>Run the command: <code style={{ background: '#1e293b', color: '#38bdf8', padding: '2px 6px', borderRadius: '4px' }}>python app.py</code></li>
+                  <li>Refresh this browser page.</li>
+                </ol>
+              </div>
             </div>
           ) : (
             <>

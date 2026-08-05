@@ -1,0 +1,150 @@
+E-COMMERCE BIG DATA ANALYTICS PROJECT Simple File Explanation
+
+This project is built to analyze customer behavior in an e-commerce
+business. It processes customer purchases and website activity, then
+creates reports and dashboards for business decisions.
+
+============================== 1. Main Project Files
+==============================
+
+run_pipeline.py
+
+This is the starting file of the project. Run this file to execute the
+complete analytics pipeline. It calls all the modules one after another.
+
+app.py
+
+This file starts the web server. It provides API endpoints and displays
+the React dashboard in the browser.
+
+requirements.txt
+
+Contains the list of Python libraries needed for the project such as
+PySpark, Pandas, NumPy, Scikit-learn, Matplotlib, and MLxtend.
+
+README.md
+
+The main documentation file. It explains how to install, run, and
+understand the project.
+
+============================== 2. Source Code Folder (src)
+==============================
+
+main.py
+
+Controls the complete workflow. It loads the data, cleans it, performs
+analysis, and saves the results.
+
+data_loader.py
+
+Loads datasets or creates synthetic sample datasets for testing.
+
+data_cleaning.py
+
+Removes invalid records, fixes missing values, formats dates, and
+prepares clean data for analysis.
+
+cohort_analysis.py
+
+Groups customers based on the month of their first purchase. Shows how
+many customers return in later months.
+
+rfm_analysis.py
+
+Calculates: Recency - How recently a customer purchased. Frequency - How
+often they purchase. Monetary - How much they spend.
+
+Customers are then grouped into different business segments.
+
+segmentation.py
+
+Assigns labels such as: - Champions - Loyal Customers - New Customers -
+At Risk - Lost Customers
+
+basket_analysis.py
+
+Finds products that customers frequently buy together. Useful for
+product recommendations and cross-selling.
+
+visualization.py
+
+Creates summary reports and prepares data for the dashboard.
+
+============================== 3. Frontend Folder
+==============================
+
+The frontend is built using React.
+
+App.jsx
+
+Main React component. Loads data from the backend and displays
+dashboards.
+
+ExecutiveOverview.jsx
+
+Shows important business KPIs such as sales, customers, and orders.
+
+ClickstreamFunnel.jsx
+
+Displays how users move through the website: View → Search → Add to Cart
+→ Purchase.
+
+RFMTable.jsx
+
+Displays customer RFM scores and segments.
+
+CohortMatrix.jsx
+
+Shows customer retention month by month.
+
+MarketBasket.jsx
+
+Displays products that are commonly purchased together.
+
+Sidebar.jsx
+
+Navigation menu for the dashboard.
+
+Header.jsx
+
+Displays the project title and connection status.
+
+============================== 4. Data Folder
+==============================
+
+customers.csv Customer details.
+
+products.csv Product information.
+
+transactions.csv Purchase history.
+
+clickstream.csv Website activity such as page views and cart actions.
+
+============================== 5. Output Folder
+==============================
+
+After the project runs, this folder stores:
+
+-   Cleaned datasets
+-   RFM results
+-   Cohort retention report
+-   Customer segments
+-   Market basket rules
+-   Clickstream summary
+-   Dashboard JSON files
+
+============================== 6. Project Workflow
+==============================
+
+1.  Load Data
+2.  Clean Data
+3.  Analyze Transactions
+4.  Perform RFM Analysis
+5.  Perform Cohort Analysis
+6.  Find Product Associations
+7.  Create Customer Segments
+8.  Generate Reports
+9.  Display Dashboard
+
+This document provides a simple explanation of each file and module
+without going into implementation details.

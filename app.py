@@ -1,6 +1,6 @@
 # ==============================================================================
-# Python Web Dashboard Application
-# Big Data Customer Analytics Dashboard Server
+# Python Web Dashboard Application & Analytics API Server
+# Serves JSON analytics endpoints and builds static React frontend assets
 # ==============================================================================
 
 import os
@@ -9,15 +9,36 @@ import json
 import csv
 import http.server
 import socketserver
-import webbrowser
 
 PORT = 8501
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def load_csv(filepath):
-    if not os.path.exists(filepath):
+
+def load_csv(filename):
+    """Load CSV rows from output/ or fallback to data/processed/."""
+    path1 = os.path.join(BASE_DIR, "output", filename)
+    path2 = os.path.join(BASE_DIR, "data", "processed", filename)
+
+    target_path = path1 if os.path.exists(path1) else (path2 if os.path.exists(path2) else None)
+    if not target_path:
         return []
-    with open(filepath, "r", encoding="utf-8") as f:
+
+    with open(target_path, "r", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def load_json(filename):
+    """Load JSON file from output/ or fallback to data/processed/."""
+    path1 = os.path.join(BASE_DIR, "output", filename)
+    path2 = os.path.join(BASE_DIR, "data", "processed", filename)
+
+    target_path = path1 if os.path.exists(path1) else (path2 if os.path.exists(path2) else None)
+    if not target_path:
+        return {}
+
+    with open(target_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 
 class DashboardHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
@@ -35,34 +56,29 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            funnel_summary = {}
-            if os.path.exists("data/processed/clickstream_funnel_summary.json"):
-                with open("data/processed/clickstream_funnel_summary.json", "r", encoding="utf-8") as f:
-                    funnel_summary = json.load(f)
+
             data = {
-                "customer_summary": load_csv("data/processed/customer_aggregated.csv"),
-                "rfm_segments": load_csv("data/processed/rfm_customer_segments.csv"),
-                "cohort_matrix": load_csv("data/processed/cohort_retention_matrix.csv"),
-                "market_basket_rules": load_csv("data/processed/market_basket_rules.csv"),
-                "clickstream_funnel": funnel_summary
+                "customer_summary": load_csv("customer_aggregated.csv"),
+                "rfm_segments": load_csv("rfm_customer_segments.csv"),
+                "cohort_matrix": load_csv("cohort_retention_matrix.csv"),
+                "market_basket_rules": load_csv("market_basket_rules.csv"),
+                "clickstream_funnel": load_json("clickstream_funnel_summary.json")
             }
             self.wfile.write(json.dumps(data).encode("utf-8"))
+
         elif self.path == "/api/clickstream_funnel":
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            funnel_summary = {}
-            if os.path.exists("data/processed/clickstream_funnel_summary.json"):
-                with open("data/processed/clickstream_funnel_summary.json", "r", encoding="utf-8") as f:
-                    funnel_summary = json.load(f)
+            funnel_summary = load_json("clickstream_funnel_summary.json")
             self.wfile.write(json.dumps(funnel_summary).encode("utf-8"))
+
         else:
-            # Serve React built static assets from frontend/dist if available
-            dist_dir = os.path.join(os.path.dirname(__file__), "frontend", "dist")
-            req_path = self.path.lstrip("/")
+            dist_dir = os.path.join(BASE_DIR, "frontend", "dist")
+            req_path = self.path.lstrip("/").split("?")[0]
             target_file = os.path.join(dist_dir, req_path)
 
-            if os.path.exists(target_file) and os.path.isfile(target_file):
+            if req_path and os.path.exists(target_file) and os.path.isfile(target_file):
                 self.send_response(200)
                 if target_file.endswith(".html"):
                     self.send_header("Content-type", "text/html")
@@ -70,6 +86,10 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header("Content-type", "application/javascript")
                 elif target_file.endswith(".css"):
                     self.send_header("Content-type", "text/css")
+                elif target_file.endswith(".json"):
+                    self.send_header("Content-type", "application/json")
+                elif target_file.endswith(".svg"):
+                    self.send_header("Content-type", "image/svg+xml")
                 self.end_headers()
                 with open(target_file, "rb") as f:
                     self.wfile.write(f.read())
@@ -81,6 +101,7 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     self.wfile.write(f.read())
             else:
                 super().do_GET()
+
 
 def main():
     print("=========================================================")
@@ -95,6 +116,7 @@ def main():
             httpd.serve_forever()
         except KeyboardInterrupt:
             print("\nServer stopped.")
+
 
 if __name__ == "__main__":
     main()

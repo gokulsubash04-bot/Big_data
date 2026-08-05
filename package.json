@@ -1,0 +1,11 @@
+{
+  "name": "big-data-customer-analytics",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Commerce Big Data Customer Analytics Dashboard & Processing Pipeline",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "python app.py"
+  }
+}

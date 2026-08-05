@@ -1,34 +1,38 @@
 # ==============================================================================
-# Master Python Pipeline Execution Script
-# Big Data Analytics Workflow: Ingestion, PySpark/ETL, Cohorts, RFM & Basket Rules
+# Master Python Pipeline Execution Launcher
+# Runs the full E-Commerce Big Data Analytics Workflow
 # ==============================================================================
 
+import os
+import sys
 import time
 import subprocess
-import sys
+
 
 def run_script(script_path):
-    print(f"\n---> Executing {script_path}...")
+    print(f"---> Executing: {script_path}")
     res = subprocess.run([sys.executable, script_path], check=True)
     return res.returncode == 0
 
+
 def main():
     print("******************************************************************")
-    print("  E-COMMERCE BIG DATA ANALYTICS PIPELINE (Python Workflow)")
+    print("  LAUNCHING E-COMMERCE CUSTOMER BEHAVIOR ANALYTICS PIPELINE")
     print("******************************************************************\n")
 
     start_time = time.time()
+    main_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", "main.py")
 
-    run_script("scripts/01_data_generator.py")
-    run_script("scripts/02_spark_etl_pipeline.py")
-    run_script("scripts/03_cohort_analysis.py")
-    run_script("scripts/04_rfm_segmentation.py")
-    run_script("scripts/05_basket_analysis.py")
+    try:
+        run_script(main_script)
+        elapsed = time.time() - start_time
+        print("******************************************************************")
+        print(f"  PIPELINE COMPLETED SUCCESSFULLY IN {elapsed:.2f} SECONDS!")
+        print("******************************************************************\n")
+    except subprocess.CalledProcessError as e:
+        print(f"\n[ERROR] Pipeline execution failed with return code {e.returncode}")
+        sys.exit(e.returncode)
 
-    elapsed = time.time() - start_time
-    print("\n******************************************************************")
-    print(f"  ALL PYTHON PIPELINE STAGES COMPLETED SUCCESSFULLY IN {elapsed:.2f} SECONDS!")
-    print("******************************************************************\n")
 
 if __name__ == "__main__":
     main()
