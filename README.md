@@ -1,201 +1,160 @@
-# 🛒 E-Commerce Big Data Analytics Pipeline in Python
+# 🛒 Electronics E-Commerce Big Data Analytics Using Hadoop and PySpark
 
-An end-to-end distributed batch-processing and customer analytics workflow built in **Python** (utilizing `PySpark` / `pandas` / `scikit-learn` Machine Learning, `Apriori` association rule mining, cohort retention heatmaps, and a glassmorphism web visualization suite).
-
----
-
-## 📌 Data Provenance & Dataset Information
-
-### Where Does the Data Come From?
-In real-world e-commerce enterprise environments (such as **Amazon**, **Shopify**, **eBay**, or **Target**), customer analytics systems ingest data from two primary enterprise data streams:
-1. **Transactional DB Logs (OLTP Systems)**: Invoices, purchase line items, payment timestamps, product SKUs, and monetary totals.
-2. **Web/Mobile Clickstream Stream (Kafka / Kinesis Events)**: High-frequency user event logs capturing page views, search queries, cart modifications, and checkout button clicks.
-
-### Data Modeling & Benchmark Origin
-To mirror enterprise scale while maintaining reproducibility, the data pipeline includes a **Synthetic Big Data Generator (`01_data_generator.py`)** modeled after famous industry benchmarks:
-- **UCI Machine Learning Repository - Online Retail II Dataset**: Standard benchmark for non-store online retail transaction patterns (UK-based retailer data).
-- **Kaggle E-Commerce Clickstream Logs Dataset**: Benchmark for user sessionization, view-to-cart conversion rates, and funnel drop-off curves.
-- **E-Commerce Industry Benchmark Ratios**:
-  - Average View-to-Cart Conversion: ~15% - 20%
-  - Cart-to-Purchase Conversion: ~25% - 30%
-  - Customer Recency & Frequency Pareto Distribution: 80% of revenue driven by top 20% of customers.
-
-The generator supports multi-million record scale output configurable for distributed PySpark/Hadoop cluster execution.
+An enterprise-grade, streamlined 3rd-year college Big Data analytics project built using **Apache Hadoop (HDFS & YARN)**, **PySpark**, **Python**, **Docker**, **Scikit-Learn (RFM & K-Means)**, and a **React Web Visualization Suite**.
 
 ---
 
-## 📑 Complete Data Dictionary & Schemas
+## 📌 Project Overview & Objective
 
-### 1. Ingested Raw Datasets (`data/raw/`)
+### 🎯 Main Objective
+> **"How can Big Data technologies be used to analyze customer purchasing behaviour in an electronics e-commerce store?"**
 
-#### A. `raw_transactions.csv` (Transactional Log)
-| Column Name | Data Type | Description | Sample Value |
-| :--- | :--- | :--- | :--- |
-| `invoice_no` | String | Unique 6-digit transaction identifier | `INV_000102` |
-| `customer_id` | String | Unique customer identifier | `CUST_00142` |
-| `stock_code` | String | Product SKU stock code | `PROD_0012` |
-| `description` | String | Human-readable product description | `Product 12 Luxury` |
-| `quantity` | Integer | Number of item units ordered | `3` |
-| `unit_price` | Float | Price per item unit ($) | `49.99` |
-| `transaction_date` | Datetime | Timestamp of purchase completion | `2024-03-14 14:22:05` |
-| `country` | String | Customer billing country | `United States` |
-
-#### B. `raw_clickstream.csv` (User Browsing Event Stream)
-| Column Name | Data Type | Description | Sample Value |
-| :--- | :--- | :--- | :--- |
-| `event_id` | String | Unique clickstream event ID | `EVT_00048210` |
-| `session_id` | String | Unique user browsing session ID | `SESS_0001249` |
-| `customer_id` | String | Unique customer identifier | `CUST_00142` |
-| `timestamp` | Datetime | Event timestamp | `2024-03-14 14:05:12` |
-| `event_type` | String | Action type (`view`, `search`, `add_to_cart`, `purchase`) | `add_to_cart` |
-| `product_id` | String | SKU code interacted with | `PROD_0012` |
-| `device_type` | String | Client device type (`Mobile`, `Desktop`, `Tablet`) | `Mobile` |
+This project ingests, stores, processes, and analyzes customer transaction logs and browsing clickstream data for an **Electronics E-Commerce Store** selling products such as:
+- **Smartphones** (`iPhone 15 Pro`, `Samsung Galaxy S24 Ultra`, `Google Pixel 8 Pro`)
+- **Laptops** (`MacBook Pro 16" M3 Max`, `Dell XPS 15 OLED`, `Lenovo ThinkPad X1`)
+- **Headphones** (`Sony WH-1000XM5`, `Apple AirPods Max`, `Bose QuietComfort Ultra`)
+- **Keyboards** (`Logitech MX Keys`, `Keychron K2 Mechanical`)
+- **Mouse** (`Logitech MX Master 3S`, `Razer DeathAdder V3`)
+- **Monitors** (`Dell UltraSharp 27" 4K`, `LG UltraGear 34" Curved Gaming`)
+- **Smartwatches** (`Apple Watch Series 9`, `Samsung Galaxy Watch 6`)
+- **Tablets** (`iPad Air 5th Gen`, `Samsung Galaxy Tab S9 Ultra`)
+- **Chargers** (`Anker 65W GaN Fast Charger`, `Apple 20W USB-C Adapter`)
 
 ---
 
-### 2. Transformed & Processed Datasets (`data/processed/`)
+## 🏗️ Simplified Architecture & Data Flow
 
-#### A. `customer_aggregated.csv` (Master Customer Profile Table)
-| Column Name | Data Type | Description & Mathematical Formula |
-| :--- | :--- | :--- |
-| `customer_id` | String | Primary Key for customer entity |
-| `total_monetary_spend` | Float | \(\sum (\text{quantity} \times \text{unit\_price})\) total spend ($) |
-| `transaction_frequency` | Integer | Total count of distinct invoices |
-| `total_items_purchased` | Integer | Total sum of units purchased |
-| `first_purchase` | Datetime | Earliest transaction timestamp (Acquisition date) |
-| `last_purchase` | Datetime | Most recent transaction timestamp |
-| `views` | Integer | Total product page views in clickstream |
-| `carts` | Integer | Total add-to-cart actions |
-| `purchases` | Integer | Total completed purchase actions |
-| `searches` | Integer | Total search queries conducted |
-| `total_sessions` | Integer | Total distinct browsing sessions |
-| `cart_to_view_ratio` | Float | \(\frac{\text{carts}}{\text{views}}\) intent ratio |
-| `avg_order_value` | Float | \(\frac{\text{total\_monetary\_spend}}{\text{transaction\_frequency}}\) Average Order Value (AOV) |
-
-#### B. `rfm_customer_segments.csv` (RFM & K-Means Clusters)
-| Column Name | Data Type | Description |
-| :--- | :--- | :--- |
-| `recency_days` | Float | Days elapsed between reference date and `last_purchase` |
-| `r_score` | Integer (1-5) | Recency score quantile (5 = most recent) |
-| `f_score` | Integer (1-5) | Frequency score quantile (5 = most frequent) |
-| `m_score` | Integer (1-5) | Monetary score quantile (5 = highest spender) |
-| `rfm_score` | String | Concatenated score (e.g. `555`, `111`) |
-| `customer_segment` | String | Rule-mapped segment (`Champions`, `Loyal Customers`, `At Risk`, etc.) |
-| `cluster_id` | String | K-Means machine learning cluster ID |
-
-#### C. `cohort_retention_matrix.csv` (Cohort Retention Heatmap)
-| Column Name | Data Type | Description |
-| :--- | :--- | :--- |
-| `cohort_month` | String | Customer acquisition month (`YYYY-MM`) |
-| `cohort_size` | Integer | Number of newly acquired active users in Month 0 |
-| `Month_0` to `Month_6` | Float | Retention percentage (\(\%\)) of active users returning in subsequent months |
-
-#### D. `market_basket_rules.csv` (Association Rules)
-| Column Name | Data Type | Metric Formula & Business Interpretation |
-| :--- | :--- | :--- |
-| `stock_code_A` | String | Antecedent item (If purchased...) |
-| `stock_code_B` | String | Consequent item (...then also purchased) |
-| `support` | Float | \(P(A \cap B) = \frac{\text{Transactions with A and B}}{\text{Total Transactions}}\) |
-| `confidence` | Float | \(P(B \mid A) = \frac{\text{Support}(A \cap B)}{\text{Support}(A)}\) probability of buying B given A |
-| `lift` | Float | \(\frac{\text{Support}(A \cap B)}{\text{Support}(A) \times \text{Support}(B)}\) cross-sell multiplier (> 1.0 indicates strong association) |
-
-#### E. `clickstream_funnel_summary.json` (Pre-Aggregated Clickstream Conversion Analytics)
-| Object Key | Data Type | Description |
-| :--- | :--- | :--- |
-| `event_counts` | JSON Object | Event volume counts by stage (`view`, `search`, `add_to_cart`, `purchase`) |
-| `session_counts` | JSON Object | Unique user browsing sessions reaching each stage |
-| `stage_conversions` | JSON Object | Step-by-step conversion rates (`view_to_search`, `search_to_cart`, `cart_to_purchase`, `overall_conversion`) |
-| `stage_drop_offs` | JSON Object | Drop-off percentages (%) and lost session counts per stage |
-| `device_breakdown` | JSON Object | Device-level conversion metrics (`Mobile`, `Desktop`, `Tablet`) |
-
----
-
-## 🏗️ Architecture & Data Flow Diagram
-
-```
-+-----------------------------------------------------------------------------------+
-|                            1. RAW DATA GENERATION & INGESTION                     |
-|  - Clickstream Logs: session_id, customer_id, event_type, product_id, timestamp   |
-|  - Transaction Logs: invoice_no, customer_id, stock_code, quantity, unit_price    |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                      2. PYSPARK / BATCH PROCESSING ETL (PYTHON)                   |
-|  - Data Cleaning (Handling missing values, deduplication, price validation)       |
-|  - Sessionization & Behavioral Extraction (View-to-Cart ratio, Conversion)        |
-|  - Funnel Aggregation (Pre-computes clickstream_funnel_summary.json)              |
-|  - Customer Aggregation (AOV, Frequency, Monetary spend, First/Last purchase)     |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                          3. ANALYTICAL PROCESSING MODULES                         |
-|  - Cohort Analysis (03_cohort_analysis.py): Multi-month retention rate heatmaps   |
-|  - RFM Scoring (04_rfm_segmentation.py): Quantile binning & scikit-learn K-Means   |
-|  - Basket Analysis (05_basket_analysis.py): Apriori Association Rule Mining       |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                      4. BUSINESS DASHBOARD & VISUALIZATION                        |
-|  - Python Web Dashboard Server (app.py) & REST API (/api/data)                     |
-|  - High Performance React (Vite) Single Page Application (frontend/)              |
-|  - Interactive Glassmorphism Suite (Executive, Funnel, RFM, Cohorts, Basket Rules) |
-+-----------------------------------------------------------------------------------+
+```text
+             Electronics E-Commerce Data
+                         ↓
+                    Data Loader
+                         ↓
+                    Hadoop HDFS (/ecommerce/raw/)
+                         ↓
+                       YARN
+                         ↓
+                     PySpark
+                         ↓
+                  Data Cleaning
+                         ↓
+                    RFM Analysis
+                         ↓
+                     K-Means
+                         ↓
+              Customer Segmentation
+                         ↓
+                  Processed Results (/ecommerce/processed/)
+                         ↓
+                      app.py
+                         ↓
+                    API / HTTP
+                         ↓
+                  React Dashboard
 ```
 
 ---
 
-## 🚀 How to Run the Pipeline
+## 🔑 Technology Stack & Viva Quick Reference
 
-### 1. Install Backend Dependencies
-```bash
-pip install -r requirements.txt
+| Technology | Role in Project | Viva-Friendly Simple Explanation |
+| :--- | :--- | :--- |
+| 🐘 **Hadoop HDFS** | Distributed Block Storage | *HDFS stores large raw and processed datasets across nodes (`/ecommerce/raw/`).* |
+| ⚙️ **Hadoop YARN** | Cluster Resource Manager | *YARN allocates RAM and CPU resources to container tasks across the cluster.* |
+| ⚡ **PySpark** | Distributed ETL Engine | *PySpark processes, cleans, and aggregates large DataFrames in parallel.* |
+| 📊 **RFM Analysis** | Behavioral Scoring | *Measures Recency (days), Frequency (orders), and Monetary ($ spend) on a 1-5 scale.* |
+| 🤖 **K-Means ML** | Customer Clustering | *Groups customers into 4 behavioral segments (Champions, Loyal, At Risk, Lost).* |
+| 🐍 **app.py Server** | Python REST API | *Multi-threaded Python server exposing JSON analytics endpoints on port 8501.* |
+| 🖥️ **React + Vite** | Visual Web Dashboard | *Single-page web dashboard rendering live analytics charts and customer profiles.* |
+| 🐳 **Docker Compose**| Container Orchestration| *Spins up containerized Hadoop NameNode, DataNode, YARN, Runner, and UI.* |
+
+---
+
+## 📂 Project Directory Structure
+
+```
+Big_Data/
+├── Dockerfile                   # Docker container build script (Java 11, Hadoop 3.3.6, Python 3.10)
+├── docker-compose.yml           # Container orchestration (NameNode, DataNode, YARN, Runner, UI)
+├── entrypoint.sh                # Container entrypoint for HDFS formatting & pipeline launch
+├── app.py                       # Multi-threaded Python server & API host (Port 8501)
+├── run_pipeline.py              # Master pipeline execution script
+├── requirements.txt             # Cleaned Python dependencies
+├── README.md                    # Main project documentation
+├── EXPLANATION.txt              # High-level architecture explanation
+├── FILE_EXPLANATION.txt         # Module-by-module file reference guide
+├── hadoop-config/               # Apache Hadoop XML Cluster Configurations
+│   ├── core-site.xml            # Default HDFS URI (hdfs://namenode:9000)
+│   ├── hdfs-site.xml            # NameNode, DataNode storage paths & replication settings
+│   └── yarn-site.xml            # YARN ResourceManager, NodeManager & memory settings
+├── src/                         # Python Analytics Engine Modules
+│   ├── main.py                  # Master workflow controller
+│   ├── data_loader.py           # Electronics synthetic data generator
+│   ├── data_cleaning.py         # ETL & clickstream sessionization engine
+│   ├── cohort_analysis.py       # Cohort retention matrix engine
+│   ├── rfm_analysis.py          # RFM scoring & 3D K-Means clustering model
+│   ├── segmentation.py          # Customer segment mapping definitions
+│   ├── visualization.py        # Report export helpers
+│   └── hadoop_hdfs_helper.py    # HDFS CLI integration & dataset uploader
+├── data/                        # Datasets (Generated & Processed)
+│   ├── customers.csv            # Customer profile metadata
+│   ├── products.csv             # Electronics store catalog
+│   ├── transactions.csv         # Raw transactional purchase log
+│   ├── clickstream.csv          # Raw web/mobile event log
+│   └── processed/               # Processed CSV tables (Cleaned profiles, RFM, Cohorts)
+├── output/                      # Analytics Outputs & Dashboard JSON files
+│   ├── customer_aggregated.csv  # Master aggregated customer table
+│   ├── rfm_customer_segments.csv# RFM scores & K-Means Cluster IDs
+│   ├── cohort_retention_matrix.csv# Cohort retention matrix
+│   └── clickstream_funnel_summary.json # Conversion funnel JSON metrics
+└── frontend/                    # React Web Dashboard (Vite, Chart.js, Lucide icons)
+    ├── src/                     # React Components (App, ExecutiveOverview, PipelineFlow, RFMTable, etc.)
+    └── dist/                    # Compiled production React bundle
 ```
 
-### 2. Install React Frontend Dependencies & Build UI
-```bash
-cd frontend
-npm install
-npm run build
-cd ..
+---
+
+## 📑 Data Schema Examples
+
+### `transactions.csv` (Electronics Purchase History)
+```csv
+invoice_no,customer_id,product_id,product_name,category,quantity,unit_price,transaction_date,country,device
+INV_10001,C0101,P001,iPhone 15 Pro 256GB,Smartphones,1,999.00,2024-03-21 07:07:02,United States,Desktop
+INV_10002,C0102,P005,MacBook Pro 16" M3 Max,Laptops,1,2499.00,2024-07-21 19:54:19,United Kingdom,Mobile
+INV_10003,C0101,P009,Sony WH-1000XM5 ANC,Headphones,1,399.00,2024-09-19 22:24:19,Germany,Desktop
 ```
 
-### 3. Execute Complete Pipeline (Python Workflow)
-Run all raw data generation, ETL stages, analytics models, RFM K-Means clustering, association rules, and funnel pre-computations:
-```bash
+---
+
+## 🚀 How to Run & Demonstrate the Project
+
+### Option A: Docker Containerized Hadoop Cluster (Recommended)
+
+```powershell
+# Build & start Hadoop HDFS cluster and web services
+docker-compose up --build -d
+```
+
+#### 🌐 Container Web Service Ports:
+- 🖥️ **Web Dashboard**: [http://localhost:8501](http://localhost:8501)
+- 🐘 **Hadoop NameNode UI**: [http://localhost:9870](http://localhost:9870)
+- ⚙️ **Hadoop YARN ResourceManager**: [http://localhost:8088](http://localhost:8088)
+- 💾 **Hadoop DataNode UI**: [http://localhost:9864](http://localhost:9864)
+
+---
+
+### Option B: Local Execution
+
+```powershell
+# 1. Run full pipeline
 python run_pipeline.py
-```
 
-### 4. Launch Interactive Web Dashboard Server
-```bash
+# 2. Launch web server
 python app.py
 ```
-Then open `http://localhost:8501` to view the React Single Page Application dashboard!
-
-*Optional*: To run the React development server with Hot Module Replacement (HMR):
-```bash
-cd frontend
-npm run dev
-```
+Open [http://localhost:8501](http://localhost:8501) in your browser.
 
 ---
 
-## 📊 Key Analytical Findings & Business Recommendations
+## 🎯 Viva Explanation Script
 
-1. **Clickstream Conversion Funnel Optimization**:
-   - High drop-off identified at the **Cart-to-Purchase** checkout stage.
-   - **Recommendation**: Implement 1-click Express Checkout (Apple Pay / Google Pay) and automated exit-intent cart recovery nudges at 30 minutes post-abandonment.
-
-2. **Cohort Retention Analysis**:
-   - Customer retention drops significantly after Month 1 (average retention: ~20-25%).
-   - **Recommendation**: Trigger automated re-engagement email campaigns and dynamic discount codes at **Day 21** after initial purchase.
-
-3. **RFM Customer Segmentation**:
-   - **Champions & Loyal Customers**: Represent top 25% of total gross revenue.
-   - **At Risk Segment**: High previous spenders with no activity in > 90 days. Win-back discount incentives can recover 15-20% of lost revenue.
-
-4. **Market Basket Association Rules**:
-   - Identified high **Lift (>1.4x)** product bundles (e.g., *Product 6 Luxury + Product 15 Modern*).
-   - **Recommendation**: Place dynamic product bundle recommendations on product pages and cart checkout modals to boost **Average Order Value (AOV)**.
+> *"Our project is an Electronics E-Commerce Big Data analytics system. We generate transaction data for electronics items like smartphones and laptops and store it in Hadoop HDFS. YARN manages the cluster resources, and PySpark cleans and aggregates the dataset. We use RFM analysis to measure customer recency, frequency, and spend, and K-Means clustering to group customers into 4 behavioral segments (Champions, Loyal Customers, At Risk, Lost Customers). The processed outputs are served through a multi-threaded Python backend (`app.py`) and displayed on a React web dashboard. The entire environment runs cleanly using Docker Compose."*

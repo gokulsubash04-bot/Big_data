@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
-import ExecutiveOverview from './components/ExecutiveOverview';
-import ClickstreamFunnel from './components/ClickstreamFunnel';
-import RFMTable from './components/RFMTable';
-import CohortMatrix from './components/CohortMatrix';
-import MarketBasket from './components/MarketBasket';
+import CustomerAnalysis from './components/CustomerAnalysis';
+import HadoopCluster from './components/HadoopCluster';
 
 export default function App() {
-  const [activeView, setActiveView] = useState('overview');
+  const [activeView, setActiveView] = useState('customer_analysis');
   const [data, setData] = useState({
     customer_summary: [],
     rfm_segments: [],
     cohort_matrix: [],
-    market_basket_rules: [],
     clickstream_funnel: {}
   });
   const [loading, setLoading] = useState(true);
@@ -63,7 +59,7 @@ export default function App() {
       <Sidebar activeView={activeView} setActiveView={setActiveView} />
 
       <main className="main-content">
-        <Header activeView={activeView} />
+        <Header activeView={activeView} setActiveView={setActiveView} />
 
         <div className="content-scroll">
           {loading ? (
@@ -87,11 +83,8 @@ export default function App() {
             </div>
           ) : (
             <>
-              {activeView === 'overview' && <ExecutiveOverview data={data} />}
-              {activeView === 'clickstream' && <ClickstreamFunnel data={data} />}
-              {activeView === 'rfm' && <RFMTable data={data} />}
-              {activeView === 'cohorts' && <CohortMatrix data={data} />}
-              {activeView === 'basket' && <MarketBasket data={data} />}
+              {activeView === 'customer_analysis' && <CustomerAnalysis data={data} />}
+              {activeView === 'hadoop' && <HadoopCluster />}
             </>
           )}
         </div>

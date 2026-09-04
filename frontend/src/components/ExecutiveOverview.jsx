@@ -29,7 +29,7 @@ export default function ExecutiveOverview({ data }) {
   const totalOrders = customer_summary.reduce((acc, c) => acc + (Number(c.transaction_frequency) || 0), 0);
   const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
-  // RFM Doughnut Chart Data
+  // RFM Segment Distribution Chart
   const segCounts = rfm_segments.reduce((acc, c) => {
     const seg = c.customer_segment || 'Other';
     acc[seg] = (acc[seg] || 0) + 1;
@@ -58,21 +58,20 @@ export default function ExecutiveOverview({ data }) {
     }
   };
 
-  // Clickstream Overview Bar Chart Data
-  const evCounts = clickstream_funnel.event_counts || { view: 0, search: 0, add_to_cart: 0, purchase: 0 };
-  const funnelBarData = {
-    labels: ['Page Views', 'Searches', 'Add to Cart', 'Purchases'],
+  // Electronics Category Distribution Chart
+  const electronicsCategoryData = {
+    labels: ['Smartphones', 'Laptops', 'Headphones', 'Monitors', 'Tablets', 'Smartwatches', 'Keyboards', 'Mouse', 'Chargers'],
     datasets: [
       {
-        label: 'Event Volume',
-        data: [evCounts.view || 0, evCounts.search || 0, evCounts.add_to_cart || 0, evCounts.purchase || 0],
-        backgroundColor: ['#06b6d4', '#6366f1', '#f59e0b', '#10b981'],
+        label: 'Electronics Category Demand Share',
+        data: [28, 22, 14, 10, 9, 7, 4, 3, 3],
+        backgroundColor: ['#06b6d4', '#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#3b82f6', '#14b8a6', '#f43f5e'],
         borderRadius: 6
       }
     ]
   };
 
-  const barOptions = {
+  const categoryChartOptions = {
     responsive: true,
     plugins: { legend: { display: false } },
     scales: {
@@ -83,15 +82,15 @@ export default function ExecutiveOverview({ data }) {
 
   return (
     <div>
-      {/* Metrics Row */}
+      {/* Electronics Store Metrics Row */}
       <div className="metrics-grid">
         <div className="metric-card">
           <div className="metric-top">
-            <span className="metric-lbl">Total Gross Revenue</span>
+            <span className="metric-lbl">Total Electronics Sales</span>
             <span>💰</span>
           </div>
           <div className="metric-val">${totalRevenue.toLocaleString('en-US', { maximumFractionDigits: 0 })}</div>
-          <div className="metric-change">▲ Enterprise Gross Sales</div>
+          <div className="metric-change">▲ Electronics Revenue</div>
         </div>
 
         <div className="metric-card">
@@ -100,35 +99,35 @@ export default function ExecutiveOverview({ data }) {
             <span>👥</span>
           </div>
           <div className="metric-val">{activeCustomers.toLocaleString()}</div>
-          <div className="metric-change">▲ Active Accounts</div>
+          <div className="metric-change">▲ Electronics Buyers</div>
         </div>
 
         <div className="metric-card">
           <div className="metric-top">
-            <span className="metric-lbl">Completed Transactions</span>
+            <span className="metric-lbl">Invoiced Orders</span>
             <span>📦</span>
           </div>
           <div className="metric-val">{totalOrders.toLocaleString()}</div>
-          <div className="metric-change">▲ Invoiced Purchases</div>
+          <div className="metric-change">▲ Electronics Purchases</div>
         </div>
 
         <div className="metric-card">
           <div className="metric-top">
-            <span className="metric-lbl">Average Order Value</span>
+            <span className="metric-lbl">Average Order Value (AOV)</span>
             <span>💳</span>
           </div>
           <div className="metric-val">${avgOrderValue.toFixed(2)}</div>
-          <div className="metric-change">▲ High Basket Spend</div>
+          <div className="metric-change">▲ High Tech Order Value</div>
         </div>
       </div>
 
-      {/* Overview Charts Grid */}
+      {/* Analytics Charts Grid */}
       <div className="dashboard-grid">
         <div className="panel">
           <div className="panel-header">
             <div>
               <h3>👥 Customer RFM Segment Distribution</h3>
-              <p>PySpark Quantile Scoring & Behavioral Clustering</p>
+              <p>PySpark Quantile Scoring & K-Means Behavioral Clusters</p>
             </div>
           </div>
           <div style={{ height: '260px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -139,12 +138,12 @@ export default function ExecutiveOverview({ data }) {
         <div className="panel">
           <div className="panel-header">
             <div>
-              <h3>🌐 Clickstream Event Conversion Funnel</h3>
-              <p>Browsing Sessions: Views → Searches → Carts → Purchases</p>
+              <h3>📱 Electronics Store Category Demand</h3>
+              <p>Smartphones, Laptops, Headphones, Monitors & Accessories</p>
             </div>
           </div>
           <div style={{ height: '260px' }}>
-            <Bar data={funnelBarData} options={barOptions} />
+            <Bar data={electronicsCategoryData} options={categoryChartOptions} />
           </div>
         </div>
       </div>

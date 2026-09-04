@@ -1,18 +1,10 @@
-# E-Commerce Big Data Analytics Pipeline & Dashboard
-# Python Dependencies & Environment Requirements
-
-# --- Core Data Processing & Machine Learning ---
+# ==============================================================================
+# Electronics E-Commerce Big Data Analytics Dependencies
+# ==============================================================================
+pyspark>=3.5.0
+pyarrow>=14.0.0
 pandas>=2.0.0
 numpy>=1.24.0
 scikit-learn>=1.3.0
-pyspark>=3.5.0
-
-# --- Market Basket Analysis & Association Rules ---
-mlxtend>=0.23.0
-
-# --- Visualization & Reporting ---
-matplotlib>=3.7.0
-seaborn>=0.12.0
-
-# --- Web Server & API Utilities ---
 requests>=2.31.0
+urllib3>=2.0.0

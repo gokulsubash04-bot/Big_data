@@ -9,9 +9,10 @@ import time
 import subprocess
 
 
-def run_script(script_path):
+def run_script(script_path, args=None):
     print(f"---> Executing: {script_path}")
-    res = subprocess.run([sys.executable, script_path], check=True)
+    cmd = [sys.executable, script_path] + (args if args else [])
+    res = subprocess.run(cmd, check=True)
     return res.returncode == 0
 
 
@@ -24,7 +25,8 @@ def main():
     main_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src", "main.py")
 
     try:
-        run_script(main_script)
+        run_script(main_script, sys.argv[1:])
+
         elapsed = time.time() - start_time
         print("******************************************************************")
         print(f"  PIPELINE COMPLETED SUCCESSFULLY IN {elapsed:.2f} SECONDS!")

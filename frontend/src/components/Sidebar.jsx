@@ -1,30 +1,27 @@
 import React from 'react';
-import { LayoutDashboard, Users, Calendar, ShoppingBag, Globe, Zap } from 'lucide-react';
+import { Users, Database, Server } from 'lucide-react';
 
 export default function Sidebar({ activeView, setActiveView }) {
   const navItems = [
-    { id: 'overview', label: 'Executive Overview', icon: LayoutDashboard },
-    { id: 'clickstream', label: 'Clickstream Funnel', icon: Globe },
-    { id: 'rfm', label: 'RFM Segments', icon: Users },
-    { id: 'cohorts', label: 'Cohort Retention', icon: Calendar },
-    { id: 'basket', label: 'Market Basket Rules', icon: ShoppingBag },
+    { id: 'customer_analysis', label: 'Customer Analytics Pipeline', icon: Users },
+    { id: 'hadoop', label: 'Hadoop HDFS Architecture', icon: Database },
   ];
 
   return (
     <aside className="sidebar">
       <div>
         <div className="brand-box">
-          <div className="brand-icon">
-            <Zap size={22} color="#ffffff" />
+          <div className="brand-icon" style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)' }}>
+            <Server size={22} color="#ffffff" />
           </div>
           <div className="brand-info">
-            <h2>PySpark Analytics</h2>
-            <span>PySpark v3.5 • React Suite</span>
+            <h2>Big Data Pipeline</h2>
+            <span>Hadoop & PySpark RFM</span>
           </div>
         </div>
 
         <div className="nav-menu">
-          <div className="nav-section-title">Dashboards</div>
+          <div className="nav-section-title">Pipeline Architecture</div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeView === item.id;
@@ -43,11 +40,19 @@ export default function Sidebar({ activeView, setActiveView }) {
       </div>
 
       <div className="sidebar-footer">
-        <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-          Enterprise Big Data Suite<br />
-          React v19 • Vite Engine
-        </p>
+        <div style={{ background: '#0f172a', padding: '10px', borderRadius: '8px', border: '1px solid var(--card-border)' }}>
+          <p style={{ fontSize: '11px', color: 'var(--emerald)', margin: '0 0 4px 0', fontWeight: 600 }}>
+            ● Pipeline Status: Active
+          </p>
+          <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: 0, lineHeight: 1.4 }}>
+            HDFS: hdfs://namenode:9000<br />
+            API: http://localhost:8501
+          </p>
+        </div>
       </div>
     </aside>
   );
 }
+
+
+

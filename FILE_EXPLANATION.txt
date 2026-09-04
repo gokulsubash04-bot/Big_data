@@ -1,150 +1,121 @@
-E-COMMERCE BIG DATA ANALYTICS PROJECT Simple File Explanation
+ELECTRONICS E-COMMERCE BIG DATA ANALYTICS PROJECT - FILE EXPLANATION
 
-This project is built to analyze customer behavior in an e-commerce
-business. It processes customer purchases and website activity, then
-creates reports and dashboards for business decisions.
+This project analyzes customer behavior in an Electronics E-Commerce Store
+selling Smartphones, Laptops, Headphones, Keyboards, Mouse, Monitors, Smartwatches,
+Tablets, and Chargers.
 
 ============================== 1. Main Project Files
 ==============================
 
 run_pipeline.py
 
-This is the starting file of the project. Run this file to execute the
-complete analytics pipeline. It calls all the modules one after another.
+Starts the complete data pipeline: Data Loader -> HDFS -> PySpark -> Data Cleaning -> RFM Analysis -> K-Means -> Customer Segmentation.
 
 app.py
 
-This file starts the web server. It provides API endpoints and displays
-the React dashboard in the browser.
+Starts the Python Web Dashboard server at http://localhost:8501. Serves JSON API endpoints and React frontend.
 
 requirements.txt
 
-Contains the list of Python libraries needed for the project such as
-PySpark, Pandas, NumPy, Scikit-learn, Matplotlib, and MLxtend.
+List of Python dependencies (pyspark, pyarrow, pandas, numpy, scikit-learn).
 
 README.md
 
-The main documentation file. It explains how to install, run, and
-understand the project.
+Main documentation with Viva explanation script, architecture flowchart, and setup instructions.
+
+============================== 1b. Docker & Hadoop Infrastructure
+==============================
+
+docker-compose.yml
+
+Orchestrates multi-container Hadoop cluster (NameNode, DataNode, YARN ResourceManager, NodeManager, Pipeline Runner, and Web Dashboard).
+
+Dockerfile
+
+Defines container environment with OpenJDK 11, Hadoop 3.3.6, and Python 3.10.
+
+entrypoint.sh
+
+Formats HDFS, initializes services based on role, and launches the pipeline.
+
+hadoop-config/
+
+Contains core-site.xml, hdfs-site.xml, and yarn-site.xml configuration files.
+
+src/hadoop_hdfs_helper.py
+
+Manages HDFS commands and uploads dataset to /ecommerce/raw/.
 
 ============================== 2. Source Code Folder (src)
 ==============================
 
 main.py
 
-Controls the complete workflow. It loads the data, cleans it, performs
-analysis, and saves the results.
+Master pipeline execution controller.
 
 data_loader.py
 
-Loads datasets or creates synthetic sample datasets for testing.
+Generates synthetic datasets for Electronics Store (Smartphones, Laptops, Headphones, Keyboards, Mouse, Monitors, Smartwatches, Tablets, Chargers).
 
 data_cleaning.py
 
-Removes invalid records, fixes missing values, formats dates, and
-prepares clean data for analysis.
-
-cohort_analysis.py
-
-Groups customers based on the month of their first purchase. Shows how
-many customers return in later months.
+Cleans transaction line items, removes invalid values, and aggregates customer metrics.
 
 rfm_analysis.py
 
-Calculates: Recency - How recently a customer purchased. Frequency - How
-often they purchase. Monetary - How much they spend.
-
-Customers are then grouped into different business segments.
+Computes Recency, Frequency, and Monetary scores (1-5 scale) and runs K-Means clustering.
 
 segmentation.py
 
-Assigns labels such as: - Champions - Loyal Customers - New Customers -
-At Risk - Lost Customers
-
-basket_analysis.py
-
-Finds products that customers frequently buy together. Useful for
-product recommendations and cross-selling.
+Assigns behavioral segment labels (Champions, Loyal Customers, At Risk, Lost Customers).
 
 visualization.py
 
-Creates summary reports and prepares data for the dashboard.
+Prepares JSON payloads and summary reports.
 
-============================== 3. Frontend Folder
+============================== 3. Frontend Folder (frontend)
 ==============================
-
-The frontend is built using React.
 
 App.jsx
 
-Main React component. Loads data from the backend and displays
-dashboards.
+Main React component managing views.
+
+PipelineFlow.jsx
+
+Visual 11-step architecture flowchart banner.
 
 ExecutiveOverview.jsx
 
-Shows important business KPIs such as sales, customers, and orders.
-
-ClickstreamFunnel.jsx
-
-Displays how users move through the website: View → Search → Add to Cart
-→ Purchase.
+Displays sales, revenue, active accounts, and customer segment doughnut chart.
 
 RFMTable.jsx
 
-Displays customer RFM scores and segments.
+Explores individual customer RFM scores and K-Means clusters.
 
-CohortMatrix.jsx
+RawDataViewer.jsx
 
-Shows customer retention month by month.
+Browses live dataset rows.
 
-MarketBasket.jsx
+HadoopCluster.jsx
 
-Displays products that are commonly purchased together.
+Inspects live NameNode, DataNode, YARN status, and HDFS file paths.
 
-Sidebar.jsx
+Sidebar.jsx & Header.jsx
 
-Navigation menu for the dashboard.
+Navigation menu and header status badges.
 
-Header.jsx
-
-Displays the project title and connection status.
-
-============================== 4. Data Folder
+============================== 4. Data & Output Folders
 ==============================
 
-customers.csv Customer details.
+data/
+- customers.csv
+- products.csv (Electronics Store Catalog)
+- transactions.csv
+- clickstream.csv
 
-products.csv Product information.
-
-transactions.csv Purchase history.
-
-clickstream.csv Website activity such as page views and cart actions.
-
-============================== 5. Output Folder
-==============================
-
-After the project runs, this folder stores:
-
--   Cleaned datasets
--   RFM results
--   Cohort retention report
--   Customer segments
--   Market basket rules
--   Clickstream summary
--   Dashboard JSON files
-
-============================== 6. Project Workflow
-==============================
-
-1.  Load Data
-2.  Clean Data
-3.  Analyze Transactions
-4.  Perform RFM Analysis
-5.  Perform Cohort Analysis
-6.  Find Product Associations
-7.  Create Customer Segments
-8.  Generate Reports
-9.  Display Dashboard
-
-This document provides a simple explanation of each file and module
-without going into implementation details.
+output/ & data/processed/
+- clean_transactions.csv
+- clean_clickstream.csv
+- customer_aggregated.csv
+- rfm_customer_segments.csv
+- clickstream_funnel_summary.json

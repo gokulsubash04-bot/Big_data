@@ -1,106 +1,111 @@
 ================================================================================
-E-COMMERCE CUSTOMER BEHAVIOR ANALYTICS SYSTEM - FILE USE & PURPOSE EXPLANATION
+ELECTRONICS E-COMMERCE BIG DATA ANALYTICS SYSTEM - PROJECT EXPLANATION
 ================================================================================
 
 This document explains the specific use, input, output, and analytical purpose 
 of every file in the project.
 
 --------------------------------------------------------------------------------
-1. ROOT EXECUTABLE FILES & SERVERS
+0. SYSTEM ARCHITECTURE & DATA FLOW
 --------------------------------------------------------------------------------
 
-1.1 `run_pipeline.py`
+             Electronics E-Commerce Data
+                         ↓
+                    Data Loader
+                         ↓
+                    Hadoop HDFS (/ecommerce/raw/)
+                         ↓
+                       YARN
+                         ↓
+                     PySpark
+                         ↓
+                  Data Cleaning
+                         ↓
+                    RFM Analysis
+                         ↓
+                     K-Means
+                         ↓
+              Customer Segmentation
+                         ↓
+                  Processed Results (/ecommerce/processed/)
+                         ↓
+                      app.py
+                         ↓
+                    API / HTTP
+                         ↓
+                  React Dashboard
+
+--------------------------------------------------------------------------------
+1. CORE TECHNOLOGIES & VIVA SUMMARY
+--------------------------------------------------------------------------------
+
+- HDFS      -> Stores raw and processed electronics datasets (/ecommerce/raw/).
+- YARN      -> Manages Hadoop cluster CPU and RAM container resources.
+- PySpark   -> Cleans, aggregates, and processes transactions in parallel.
+- RFM       -> Measures Recency (days), Frequency (orders), Monetary ($ spend).
+- K-Means   -> Groups customers into 4 behavioral segments (Champions, Loyal, At Risk, Lost).
+- app.py    -> Multi-threaded Python REST server providing JSON data to frontend.
+- React     -> Displays interactive analytics, charts, and customer segment tables.
+- Docker    -> Orchestrates containerized Hadoop NameNode, DataNode, YARN, Runner, UI.
+
+--------------------------------------------------------------------------------
+2. ROOT EXECUTABLE FILES & SERVERS
+--------------------------------------------------------------------------------
+
+2.1 `run_pipeline.py`
     - Use: Execute the master data processing pipeline.
     - Command: `python run_pipeline.py`
-    - Function: Invokes `src/main.py` which runs data generation, cleaning, cohort 
-      analysis, RFM segmentation, K-Means clustering, and market basket mining.
+    - Function: Invokes `src/main.py` which runs data generation, HDFS storage, 
+      cleaning, RFM segmentation, and K-Means clustering.
     - Output: Generates CSV and JSON output files in `output/` and `data/processed/`.
 
-1.2 `app.py`
+2.2 `app.py`
     - Use: Launch the Web Dashboard API & Static File Server.
     - Command: `python app.py` (Server runs at http://localhost:8501)
     - Function: Exposes `/api/data` JSON endpoint and serves built React static 
       assets from `frontend/dist/`.
-    - Input: Loads datasets from `output/` and `data/processed/`.
 
-1.3 `requirements.txt`
-    - Use: Define Python library dependencies.
-    - Command: `pip install -r requirements.txt`
-    - Dependencies: `pandas`, `numpy`, `scikit-learn`, `pyspark`, `mlxtend`, etc.
+2.3 `requirements.txt`
+    - Use: Define Python library dependencies (`pyspark`, `pyarrow`, `pandas`, 
+      `numpy`, `scikit-learn`, etc.).
 
-1.4 `README.md`
+2.4 `README.md`
     - Use: Detailed project overview, architectural description, setup guide, and 
-      business intelligence insights.
-
-1.5 `FILE_EXPLANATION.txt` & `EXPLANATION.txt`
-    - Use: Detailed reference documentation explaining every file's role in the system.
+      viva explanation script.
 
 --------------------------------------------------------------------------------
-2. BACKEND ANALYTICS ENGINE (`src/` MODULES)
+3. BACKEND ANALYTICS ENGINE (`src/` MODULES)
 --------------------------------------------------------------------------------
 
-2.1 `src/main.py`
+3.1 `src/main.py`
     - Use: Orchestrate end-to-end analytical workflow execution.
-    - Function: Sequentially executes `data_loader`, `data_cleaning`, `cohort_analysis`, 
-      `rfm_analysis`, and `basket_analysis`.
 
-2.2 `src/data_loader.py`
-    - Use: Synthetic E-Commerce Big Data Generator.
-    - Function: Generates 2,500 customers, 50 products, 25,000 transactions, and 
-      80,000 clickstream events using reproducible seed `42`.
-    - Outputs: `data/customers.csv`, `data/products.csv`, `data/transactions.csv`, 
-      `data/clickstream.csv`.
+3.2 `src/data_loader.py`
+    - Use: Electronics E-Commerce Data Generator.
+    - Function: Generates products across 9 electronics categories (Smartphones, 
+      Laptops, Headphones, Keyboards, Mouse, Monitors, Smartwatches, Tablets, Chargers), 
+      customer profiles, transactions, and clickstream logs.
 
-2.3 `src/data_cleaning.py`
-    - Use: Data Sanitization, Sessionization, and Aggregation Engine.
-    - Function: Cleans transaction line items and web logs, computes conversion 
-      funnels (view -> search -> cart -> purchase), and aggregates customer metrics.
-    - Outputs: `clean_transactions.csv`, `clean_clickstream.csv`, 
-      `customer_aggregated.csv`, `clickstream_funnel_summary.json`.
+3.3 `src/data_cleaning.py`
+    - Use: Data Sanitization and Aggregation Engine.
 
-2.4 `src/cohort_analysis.py`
-    - Use: Customer Acquisition Cohort Retention Analysis.
-    - Function: Groups customers by acquisition month and tracks repeat purchases 
-      over subsequent months (Month 0 to Month 6).
-    - Output: `cohort_retention_matrix.csv`.
+3.4 `src/rfm_analysis.py`
+    - Use: RFM Scoring & 3D K-Means Clustering Model.
 
-2.5 `src/rfm_analysis.py`
-    - Use: RFM Scoring, Rule Segmentation & 3D K-Means Clustering.
-    - Function: Computes Recency, Frequency, and Monetary scores (1-5 quantile scale), 
-      assigns rule segments, and clusters customers into 4 behavioral K-Means clusters.
-    - Output: `rfm_customer_segments.csv`.
+3.5 `src/segmentation.py`
+    - Use: Rule-based RFM segment assignment helper.
 
-2.6 `src/segmentation.py`
-    - Use: Rule-based RFM segment assignment helper (Champions, Loyal, New, At Risk, Lost).
-
-2.7 `src/visualization.py`
-    - Use: Reporting payload generator and JSON export helper.
+3.6 `src/hadoop_hdfs_helper.py`
+    - Use: HDFS CLI integration & dataset uploader helper.
 
 --------------------------------------------------------------------------------
-3. FRONTEND REACT DASHBOARD (`frontend/`)
+4. FRONTEND REACT DASHBOARD (`frontend/`)
 --------------------------------------------------------------------------------
 
-3.1 `frontend/package.json` - Configures React 19, Chart.js 4, and Vite dependencies.
-3.2 `frontend/vite.config.js` - Vite bundler configuration.
-3.3 `frontend/src/main.jsx` - React DOM mounting script.
-3.4 `frontend/src/App.jsx` - Root application layout & state manager (fetches `/api/data`).
-3.5 `frontend/src/index.css` - Dark mode design system, glassmorphism cards, and styles.
-3.6 `frontend/src/components/ExecutiveOverview.jsx` - C-suite KPI metrics & charts.
-3.7 `frontend/src/components/ClickstreamFunnel.jsx` - Funnel flow, drop-offs & device UX insights.
-3.8 `frontend/src/components/RFMTable.jsx` - Interactive RFM profiles & cluster explorer table.
-3.9 `frontend/src/components/CohortMatrix.jsx` - Heatmap table of monthly user retention %.
-3.10 `frontend/src/components/MarketBasket.jsx` - Product association pairs & lift multipliers.
-3.11 `frontend/src/components/Header.jsx` - Top navigation bar & dataset export button.
-3.12 `frontend/src/components/Sidebar.jsx` - Navigation sidebar menu.
-
---------------------------------------------------------------------------------
-4. HOW TO RUN THE PROJECT
---------------------------------------------------------------------------------
-
-Step 1: Execute Analytics Pipeline
-  $ python run_pipeline.py
-
-Step 2: Launch Dashboard Server
-  $ python app.py
-  (Access at http://localhost:8501)
+4.1 `frontend/src/App.jsx` - Root application layout & state manager.
+4.2 `frontend/src/components/PipelineFlow.jsx` - Interactive architecture flowchart banner.
+4.3 `frontend/src/components/ExecutiveOverview.jsx` - Key business KPIs & charts.
+4.4 `frontend/src/components/RFMTable.jsx` - Customer RFM profiles & ML clusters explorer.
+4.5 `frontend/src/components/RawDataViewer.jsx` - Live dataset tables inspector.
+4.6 `frontend/src/components/HadoopCluster.jsx` - HDFS & YARN node status inspector.
 ================================================================================

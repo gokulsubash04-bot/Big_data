@@ -1,5 +1,5 @@
 # ==============================================================================
-# E-Commerce Data Cleaning & Feature Aggregation Module
+# Electronics E-Commerce Data Cleaning & Feature Aggregation Module
 # Cleans raw transactions & clickstream data, builds conversion funnels & profile aggregations
 # ==============================================================================
 
@@ -49,16 +49,25 @@ def clean_transactions(raw_transactions):
         if quantity <= 0 or unit_price <= 0 or not customer_id:
             continue
 
+        product_id = row.get("product_id", "").strip() or row.get("stock_code", "").strip()
+        product_name = row.get("product_name", "").strip() or row.get("description", "").strip()
+        category = row.get("category", "Electronics").strip() or "Electronics"
+        device = row.get("device", "Desktop").strip() or "Desktop"
+
         clean.append({
             "invoice_no": row.get("invoice_no", "").strip(),
             "customer_id": customer_id,
-            "stock_code": row.get("stock_code", "").strip(),
-            "description": row.get("description", "").strip(),
+            "product_id": product_id,
+            "stock_code": product_id,
+            "product_name": product_name,
+            "description": product_name,
+            "category": category,
             "quantity": int(quantity),
             "unit_price": round(unit_price, 2),
             "total_spend": round(quantity * unit_price, 2),
             "transaction_date": row.get("transaction_date", "").strip(),
-            "country": row.get("country", "").strip()
+            "country": row.get("country", "").strip(),
+            "device": device
         })
     return clean
 
@@ -77,32 +86,25 @@ def clean_clickstream(raw_clickstream):
             "timestamp": row.get("timestamp", "").strip(),
             "event_type": row.get("event_type", "").strip(),
             "product_id": row.get("product_id", "").strip(),
-            "device_type": row.get("device_type", "Unknown").strip() or "Unknown"
+            "product_name": row.get("product_name", "").strip(),
+            "device": row.get("device", "Desktop").strip()
         })
     return clean
 
 
 def build_clickstream_funnel(clean_click):
-    """Compute conversion rates, stage drop-offs, device breakdowns, and hourly trends."""
+    """Compute conversion rates and stage drop-offs."""
     click_stats = defaultdict(lambda: {"views": 0, "carts": 0, "purchases": 0, "searches": 0, "sessions": set()})
     event_counts = {"view": 0, "search": 0, "add_to_cart": 0, "purchase": 0}
     sessions_by_event = {"view": set(), "search": set(), "add_to_cart": set(), "purchase": set()}
-    device_stats = defaultdict(lambda: {"view": 0, "search": 0, "add_to_cart": 0, "purchase": 0, "sessions": set()})
     hourly_counts = defaultdict(int)
 
     for row in clean_click:
+        etype = row.get("event_type", "view")
+        event_counts[etype] = event_counts.get(etype, 0) + 1
+        sessions_by_event[etype].add(row["session_id"])
+
         cid = row["customer_id"]
-        sid = row["session_id"]
-        etype = row["event_type"]
-        device = row.get("device_type", "Unknown")
-
-        click_stats[cid]["sessions"].add(sid)
-        if etype in event_counts:
-            event_counts[etype] += 1
-            sessions_by_event[etype].add(sid)
-            device_stats[device][etype] += 1
-            device_stats[device]["sessions"].add(sid)
-
         if etype == "view":
             click_stats[cid]["views"] += 1
         elif etype == "add_to_cart":
@@ -111,10 +113,12 @@ def build_clickstream_funnel(clean_click):
             click_stats[cid]["purchases"] += 1
         elif etype == "search":
             click_stats[cid]["searches"] += 1
+        click_stats[cid]["sessions"].add(row["session_id"])
 
-        if row.get("timestamp"):
+        ts = row.get("timestamp", "")
+        if ts:
             try:
-                dt = datetime.strptime(row["timestamp"], "%Y-%m-%d %H:%M:%S")
+                dt = datetime.strptime(ts, "%Y-%m-%d %H:%M:%S")
                 hourly_counts[dt.hour] += 1
             except ValueError:
                 pass
@@ -123,41 +127,25 @@ def build_clickstream_funnel(clean_click):
     search_sessions = len(sessions_by_event["search"])
     cart_sessions = len(sessions_by_event["add_to_cart"])
     purchase_sessions = len(sessions_by_event["purchase"])
-    all_sessions_set = set.union(*sessions_by_event.values()) if any(sessions_by_event.values()) else set()
-    total_sessions = len(all_sessions_set)
+
+    all_sessions = set().union(*sessions_by_event.values())
+    total_sessions = len(all_sessions) if all_sessions else 1
 
     stage_conversions = {
-        "view_to_search": round((search_sessions / view_sessions * 100), 2) if view_sessions > 0 else 0.0,
-        "search_to_cart": round((cart_sessions / search_sessions * 100), 2) if search_sessions > 0 else 0.0,
-        "cart_to_purchase": round((purchase_sessions / cart_sessions * 100), 2) if cart_sessions > 0 else 0.0,
-        "overall_conversion": round((purchase_sessions / view_sessions * 100), 2) if view_sessions > 0 else 0.0
+        "view_to_search_pct": round((search_sessions / view_sessions * 100), 2) if view_sessions > 0 else 0.0,
+        "search_to_cart_pct": round((cart_sessions / search_sessions * 100), 2) if search_sessions > 0 else 0.0,
+        "cart_to_purchase_pct": round((purchase_sessions / cart_sessions * 100), 2) if cart_sessions > 0 else 0.0,
+        "overall_conversion_pct": round((purchase_sessions / view_sessions * 100), 2) if view_sessions > 0 else 0.0
     }
 
     stage_drop_offs = {
-        "view_to_search_drop_pct": round(max(0.0, 100 - stage_conversions["view_to_search"]), 2),
-        "search_to_cart_drop_pct": round(max(0.0, 100 - stage_conversions["search_to_cart"]), 2),
-        "cart_to_purchase_drop_pct": round(max(0.0, 100 - stage_conversions["cart_to_purchase"]), 2),
+        "view_to_search_drop_pct": round((100 - stage_conversions["view_to_search_pct"]), 2),
+        "search_to_cart_drop_pct": round((100 - stage_conversions["search_to_cart_pct"]), 2),
+        "cart_to_purchase_drop_pct": round((100 - stage_conversions["cart_to_purchase_pct"]), 2),
         "view_to_search_drop_count": max(0, view_sessions - search_sessions),
         "search_to_cart_drop_count": max(0, search_sessions - cart_sessions),
         "cart_to_purchase_drop_count": max(0, cart_sessions - purchase_sessions)
     }
-
-    device_breakdown = {}
-    for device, stats in device_stats.items():
-        view_count = stats["view"]
-        cart_count = stats["add_to_cart"]
-        purchase_count = stats["purchase"]
-        session_count = len(stats["sessions"])
-        device_breakdown[device] = {
-            "views": view_count,
-            "searches": stats["search"],
-            "add_to_carts": cart_count,
-            "purchases": purchase_count,
-            "total_sessions": session_count,
-            "view_to_cart_pct": round((cart_count / view_count * 100), 2) if view_count > 0 else 0.0,
-            "cart_to_purchase_pct": round((purchase_count / cart_count * 100), 2) if cart_count > 0 else 0.0,
-            "overall_conversion_pct": round((purchase_count / session_count * 100), 2) if session_count > 0 else 0.0
-        }
 
     funnel_summary = {
         "event_counts": event_counts,
@@ -170,7 +158,6 @@ def build_clickstream_funnel(clean_click):
         },
         "stage_conversions": stage_conversions,
         "stage_drop_offs": stage_drop_offs,
-        "device_breakdown": device_breakdown,
         "hourly_distribution": dict(sorted(hourly_counts.items()))
     }
 
@@ -178,7 +165,7 @@ def build_clickstream_funnel(clean_click):
 
 
 def aggregate_customers(clean_transactions, clean_click):
-    """Aggregate customer-level monetary metrics, order counts, and clickstream engagement."""
+    """Build master customer profile metrics table."""
     customer_map = defaultdict(lambda: {
         "total_spend": 0.0,
         "invoices": set(),
@@ -189,12 +176,18 @@ def aggregate_customers(clean_transactions, clean_click):
 
     for row in clean_transactions:
         cid = row["customer_id"]
+        spend = row["total_spend"]
+        qty = row["quantity"]
+        inv = row["invoice_no"]
+        t_date_str = row["transaction_date"]
+
         stats = customer_map[cid]
-        stats["total_spend"] += row["quantity"] * row["unit_price"]
-        stats["invoices"].add(row["invoice_no"])
-        stats["items"] += row["quantity"]
+        stats["total_spend"] += spend
+        stats["invoices"].add(inv)
+        stats["items"] += qty
+
         try:
-            date = datetime.strptime(row["transaction_date"], "%Y-%m-%d %H:%M:%S")
+            date = datetime.strptime(t_date_str, "%Y-%m-%d %H:%M:%S")
             if stats["first_purchase"] is None or date < stats["first_purchase"]:
                 stats["first_purchase"] = date
             if stats["last_purchase"] is None or date > stats["last_purchase"]:
@@ -262,9 +255,9 @@ def run_data_cleaning(data_dir, output_dir):
     # Save to output_dir
     os.makedirs(output_dir, exist_ok=True)
     write_csv(os.path.join(output_dir, "clean_transactions.csv"), clean_transactions_data,
-              ["invoice_no", "customer_id", "stock_code", "description", "quantity", "unit_price", "total_spend", "transaction_date", "country"])
+              ["invoice_no", "customer_id", "product_id", "stock_code", "product_name", "description", "category", "quantity", "unit_price", "total_spend", "transaction_date", "country", "device"])
     write_csv(os.path.join(output_dir, "clean_clickstream.csv"), clean_clickstream_data,
-              ["event_id", "session_id", "customer_id", "timestamp", "event_type", "product_id", "device_type"])
+              ["event_id", "session_id", "customer_id", "timestamp", "event_type", "product_id", "product_name", "device"])
     write_csv(os.path.join(output_dir, "customer_aggregated.csv"), customer_profiles, [
         "customer_id", "total_monetary_spend", "transaction_frequency", "total_items_purchased",
         "first_purchase", "last_purchase", "views", "carts", "purchases", "searches",
@@ -276,9 +269,9 @@ def run_data_cleaning(data_dir, output_dir):
     proc_dir = os.path.join(data_dir, "processed")
     os.makedirs(proc_dir, exist_ok=True)
     write_csv(os.path.join(proc_dir, "clean_transactions.csv"), clean_transactions_data,
-              ["invoice_no", "customer_id", "stock_code", "description", "quantity", "unit_price", "total_spend", "transaction_date", "country"])
+              ["invoice_no", "customer_id", "product_id", "stock_code", "product_name", "description", "category", "quantity", "unit_price", "total_spend", "transaction_date", "country", "device"])
     write_csv(os.path.join(proc_dir, "clean_clickstream.csv"), clean_clickstream_data,
-              ["event_id", "session_id", "customer_id", "timestamp", "event_type", "product_id", "device_type"])
+              ["event_id", "session_id", "customer_id", "timestamp", "event_type", "product_id", "product_name", "device"])
     write_csv(os.path.join(proc_dir, "customer_aggregated.csv"), customer_profiles, [
         "customer_id", "total_monetary_spend", "transaction_frequency", "total_items_purchased",
         "first_purchase", "last_purchase", "views", "carts", "purchases", "searches",

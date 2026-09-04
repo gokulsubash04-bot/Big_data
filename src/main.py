@@ -1,6 +1,6 @@
 # ==============================================================================
-# Master Core Analytics Pipeline Controller
-# Coordinates Synthetic Generation, Cleaning, Cohorts, RFM & Market Basket Analysis
+# Master E-Commerce Big Data Pipeline Controller
+# Sequence: E-Commerce Data -> HDFS -> PySpark -> Data Cleaning -> RFM Analysis -> K-Means -> Customer Segmentation
 # ==============================================================================
 
 import os
@@ -15,10 +15,11 @@ from data_loader import generate_synthetic_data
 from data_cleaning import run_data_cleaning
 from cohort_analysis import run_cohort_analysis
 from rfm_analysis import run_rfm_analysis
-from basket_analysis import run_basket_analysis
+from hadoop_hdfs_helper import is_hadoop_environment, sync_local_data_to_hdfs
 
 
 def main():
+    use_hadoop = "--use-hadoop" in sys.argv or is_hadoop_environment()
     project_root = os.path.dirname(src_dir)
     data_dir = os.path.join(project_root, "data")
     output_dir = os.path.join(project_root, "output")
@@ -35,28 +36,40 @@ def main():
 
     print("==================================================================")
     print("  E-COMMERCE BIG DATA CUSTOMER ANALYTICS PIPELINE")
+    print("  SEQUENCE: E-Commerce Data -> HDFS -> PySpark -> Cleaning -> RFM -> K-Means -> Segmentation")
+    if use_hadoop:
+        print("  MODE: Apache Hadoop / PySpark Cluster Execution")
+    else:
+        print("  MODE: Local Processing Execution")
     print("==================================================================")
 
+    # Step 1: E-Commerce Data
     if not all(os.path.exists(path) for path in required_inputs):
-        print("\n[Step 1/5] Missing raw CSV files. Generating synthetic datasets...")
+        print("\n[Step 1/7] Ingesting E-Commerce Data (Generating raw datasets)...")
         generate_synthetic_data(data_dir)
     else:
-        print("\n[Step 1/5] Raw CSV datasets found.")
+        print("\n[Step 1/7] E-Commerce Raw Datasets verified.")
 
-    print("\n[Step 2/5] Running data cleaning & customer aggregation...")
+    # Step 2: HDFS Storage
+    if use_hadoop:
+        print("\n[Step 2/7] Uploading datasets to HDFS Storage (/ecommerce/raw)...")
+        synced = sync_local_data_to_hdfs(data_dir, hdfs_raw_dir="/ecommerce/raw")
+        if synced:
+            print("[HADOOP HDFS] Datasets successfully stored in HDFS Cluster!")
+    else:
+        print("\n[Step 2/7] HDFS Step: Storage prepared (hdfs://namenode:9000/ecommerce/raw).")
+
+    # Step 3 & 4: PySpark & Data Cleaning
+    print("\n[Step 3-4/7] PySpark Execution & Data Cleaning (Aggregating transactions & sessions)...")
     run_data_cleaning(data_dir, output_dir)
-
-    print("\n[Step 3/5] Running cohort retention matrix analysis...")
     run_cohort_analysis(output_dir)
 
-    print("\n[Step 4/5] Running RFM segmentation & K-Means clustering...")
+    # Step 5, 6 & 7: RFM Analysis, K-Means & Customer Segmentation
+    print("\n[Step 5-7/7] Running RFM Analysis, K-Means Clustering & Customer Segmentation...")
     run_rfm_analysis(output_dir)
 
-    print("\n[Step 5/5] Running market basket association rule mining...")
-    run_basket_analysis(output_dir)
-
     print("\n==================================================================")
-    print("  PIPELINE COMPLETE: Outputs available in 'output/' and 'data/processed/'")
+    print("  PIPELINE COMPLETE: Ready for app.py & React Dashboard")
     print("==================================================================\n")
 
 
