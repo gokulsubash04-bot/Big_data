@@ -1,6 +1,6 @@
 # 🛒 Electronics E-Commerce Big Data Analytics Using Hadoop and PySpark
 
-An enterprise-grade, streamlined 3rd-year college Big Data analytics project built using **Apache Hadoop (HDFS & YARN)**, **PySpark**, **Python**, **Docker**, **Scikit-Learn (RFM & K-Means)**, and a **React Web Visualization Suite**.
+An enterprise-grade, Big Data analytics project built using **Apache Hadoop (HDFS & YARN)**, **PySpark**, **Python**, **Docker**, **Scikit-Learn (RFM & K-Means)**, and a **React Web Visualization Suite**.
 
 ---
 
