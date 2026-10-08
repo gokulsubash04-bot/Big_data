@@ -1,8 +1,7 @@
 # ==============================================================================
-# Electronics E-Commerce Big Data Analytics Dependencies
+# Electronics E-Commerce Big Data Analytics Web API Dependencies (Vercel Ready)
+# Note: Heavy local cluster runners like PySpark are omitted from serverless bundle
 # ==============================================================================
-pyspark>=3.5.0
-pyarrow>=14.0.0
 pandas>=2.0.0
 numpy>=1.24.0
 scikit-learn>=1.3.0
