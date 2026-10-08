@@ -17,8 +17,8 @@ export default function App() {
 
   useEffect(() => {
     const urlsToTry = [
-      'http://localhost:8501/api/data',
-      '/api/data'
+      '/api/data',
+      'http://localhost:8501/api/data'
     ];
 
     let currentIdx = 0;

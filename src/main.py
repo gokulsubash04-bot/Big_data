@@ -15,6 +15,7 @@ from data_loader import generate_synthetic_data
 from data_cleaning import run_data_cleaning
 from cohort_analysis import run_cohort_analysis
 from rfm_analysis import run_rfm_analysis
+from inventory_restock_analysis import run_inventory_restock_analysis
 from hadoop_hdfs_helper import is_hadoop_environment, sync_local_data_to_hdfs
 
 
@@ -35,8 +36,8 @@ def main():
     ]
 
     print("==================================================================")
-    print("  E-COMMERCE BIG DATA CUSTOMER ANALYTICS PIPELINE")
-    print("  SEQUENCE: E-Commerce Data -> HDFS -> PySpark -> Cleaning -> RFM -> K-Means -> Segmentation")
+    print("  E-COMMERCE BIG DATA CUSTOMER & INVENTORY ANALYTICS PIPELINE")
+    print("  SEQUENCE: E-Commerce Data -> HDFS -> PySpark -> Cleaning -> RFM -> K-Means -> Restock Intel")
     if use_hadoop:
         print("  MODE: Apache Hadoop / PySpark Cluster Execution")
     else:
@@ -45,28 +46,32 @@ def main():
 
     # Step 1: E-Commerce Data
     if not all(os.path.exists(path) for path in required_inputs):
-        print("\n[Step 1/7] Ingesting E-Commerce Data (Generating raw datasets)...")
+        print("\n[Step 1/8] Ingesting E-Commerce Data (Generating raw datasets)...")
         generate_synthetic_data(data_dir)
     else:
-        print("\n[Step 1/7] E-Commerce Raw Datasets verified.")
+        print("\n[Step 1/8] E-Commerce Raw Datasets verified.")
 
     # Step 2: HDFS Storage
     if use_hadoop:
-        print("\n[Step 2/7] Uploading datasets to HDFS Storage (/ecommerce/raw)...")
+        print("\n[Step 2/8] Uploading datasets to HDFS Storage (/ecommerce/raw)...")
         synced = sync_local_data_to_hdfs(data_dir, hdfs_raw_dir="/ecommerce/raw")
         if synced:
             print("[HADOOP HDFS] Datasets successfully stored in HDFS Cluster!")
     else:
-        print("\n[Step 2/7] HDFS Step: Storage prepared (hdfs://namenode:9000/ecommerce/raw).")
+        print("\n[Step 2/8] HDFS Step: Storage prepared (hdfs://namenode:9000/ecommerce/raw).")
 
     # Step 3 & 4: PySpark & Data Cleaning
-    print("\n[Step 3-4/7] PySpark Execution & Data Cleaning (Aggregating transactions & sessions)...")
+    print("\n[Step 3-4/8] PySpark Execution & Data Cleaning (Aggregating transactions & sessions)...")
     run_data_cleaning(data_dir, output_dir)
     run_cohort_analysis(output_dir)
 
     # Step 5, 6 & 7: RFM Analysis, K-Means & Customer Segmentation
-    print("\n[Step 5-7/7] Running RFM Analysis, K-Means Clustering & Customer Segmentation...")
+    print("\n[Step 5-7/8] Running RFM Analysis, K-Means Clustering & Customer Segmentation...")
     run_rfm_analysis(output_dir)
+
+    # Step 8: Inventory Demand & Restock Intelligence
+    print("\n[Step 8/8] Running Product Demand & Restock Intelligence Analysis...")
+    run_inventory_restock_analysis(data_dir, output_dir)
 
     print("\n==================================================================")
     print("  PIPELINE COMPLETE: Ready for app.py & React Dashboard")

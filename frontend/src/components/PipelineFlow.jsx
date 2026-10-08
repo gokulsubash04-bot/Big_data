@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Cpu, Sparkles, Filter, BarChart, Binary, Users, Server, Layout, ArrowRight } from 'lucide-react';
+import { Database, Cpu, Sparkles, Filter, BarChart, Binary, Users, Server, Layout, ArrowRight, Boxes } from 'lucide-react';
 
 export default function PipelineFlow() {
   const steps = [
@@ -12,6 +12,7 @@ export default function PipelineFlow() {
     { title: 'RFM Analysis', icon: BarChart, desc: 'Recency, Frequency, Monetary', color: '#ec4899' },
     { title: 'K-Means', icon: Binary, desc: '3D Cluster Algorithm', color: '#a855f7' },
     { title: 'Customer Segments', icon: Users, desc: 'Champions, Loyal, At Risk', color: '#10b981' },
+    { title: 'Restock Intel', icon: Boxes, desc: 'Demand & Reorder', color: '#fbbf24' },
     { title: 'app.py', icon: Cpu, desc: 'Threaded REST API (8501)', color: '#3b82f6' },
     { title: 'React Dashboard', icon: Layout, desc: 'Glassmorphism UI', color: '#06b6d4' },
   ];

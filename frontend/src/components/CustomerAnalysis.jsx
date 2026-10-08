@@ -5,7 +5,8 @@ import CohortMatrix from './CohortMatrix';
 import ClickstreamFunnel from './ClickstreamFunnel';
 import PipelineFlow from './PipelineFlow';
 import RawDataViewer from './RawDataViewer';
-import { Users, Calendar, Globe, BarChart3, Database } from 'lucide-react';
+import ProductRestockAnalysis from './ProductRestockAnalysis';
+import { Users, Calendar, Globe, BarChart3, Database, Boxes } from 'lucide-react';
 
 export default function CustomerAnalysis({ data }) {
   const [subTab, setSubTab] = useState('overview');
@@ -17,6 +18,7 @@ export default function CustomerAnalysis({ data }) {
       {/* Sub-navigation pill bar */}
       <div style={{
         display: 'flex',
+        flexWrap: 'wrap',
         gap: '8px',
         marginBottom: '20px',
         background: '#1e293b',
@@ -43,6 +45,26 @@ export default function CustomerAnalysis({ data }) {
           }}
         >
           <BarChart3 size={15} /> Overview & KPIs
+        </button>
+
+        <button
+          onClick={() => setSubTab('restock')}
+          style={{
+            background: subTab === 'restock' ? 'var(--emerald)' : 'transparent',
+            color: subTab === 'restock' ? '#0f172a' : 'var(--text-muted)',
+            border: 'none',
+            padding: '8px 16px',
+            borderRadius: '6px',
+            fontWeight: 700,
+            fontSize: '13px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          <Boxes size={15} /> 📦 Products to Restock More
         </button>
 
         <button
@@ -127,7 +149,8 @@ export default function CustomerAnalysis({ data }) {
       </div>
 
       {/* Render selected Customer Analysis module */}
-      {subTab === 'overview' && <ExecutiveOverview data={data} />}
+      {subTab === 'overview' && <ExecutiveOverview data={data} onNavigateTab={setSubTab} />}
+      {subTab === 'restock' && <ProductRestockAnalysis data={data} />}
       {subTab === 'rfm' && <RFMTable data={data} />}
       {subTab === 'data' && <RawDataViewer data={data} />}
       {subTab === 'cohorts' && <CohortMatrix data={data} />}
