@@ -426,7 +426,7 @@ def get_embedded_dashboard_html():
             color: var(--primary);
         }
 
-        .container { max-width: 1400px; margin: 24px auto; padding: 0 24px; }
+        .container { width: 100%; margin: 24px 0; padding: 0 32px; box-sizing: border-box; }
 
         .tabs {
             display: flex;
@@ -456,9 +456,10 @@ def get_embedded_dashboard_html():
 
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
+            width: 100%;
         }
         .kpi-card {
             background: var(--card-bg);

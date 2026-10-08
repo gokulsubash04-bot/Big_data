@@ -150,9 +150,9 @@ export default function App() {
   );
 
   return (
-    <div style={{ backgroundColor: '#0f172a', color: '#f8fafc', minHeight: '100vh', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+    <div style={{ backgroundColor: '#0f172a', color: '#f8fafc', minHeight: '100vh', width: '100%', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
       {/* Header */}
-      <header style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', borderBottom: '1px solid #334155', padding: '20px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', borderBottom: '1px solid #334155', padding: '20px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         <div>
           <h1 style={{ fontSize: '22px', fontWeight: 800, color: '#38bdf8', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
             🛒 Electronics E-Commerce Analytics Dashboard
@@ -166,48 +166,48 @@ export default function App() {
         </div>
       </header>
 
-      <div style={{ maxWidth: '1400px', margin: '24px auto', padding: '0 24px' }}>
-        {/* KPI Cards Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #34d399' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>TOTAL REVENUE</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>${(kpi.total_revenue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Completed Transactions</div>
+      <div style={{ width: '100%', padding: '24px 32px', boxSizing: 'border-box' }}>
+        {/* KPI Cards Grid - Full 6 Columns in Single Row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '16px', marginBottom: '24px', width: '100%' }}>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '16px 20px', borderLeft: '4px solid #34d399' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>TOTAL REVENUE</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#f8fafc', margin: '6px 0 2px 0', whiteSpace: 'nowrap' }}>${(kpi.total_revenue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8' }}>Completed Transactions</div>
           </div>
 
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #38bdf8' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>TOTAL ORDERS</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{(kpi.total_orders || 0).toLocaleString()}</div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Unique Invoices Processed</div>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '16px 20px', borderLeft: '4px solid #38bdf8' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>TOTAL ORDERS</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#f8fafc', margin: '6px 0 2px 0' }}>{(kpi.total_orders || 0).toLocaleString()}</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8' }}>Unique Invoices Processed</div>
           </div>
 
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #a78bfa' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>AVERAGE ORDER VALUE</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>${(kpi.average_order_value || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Revenue / Total Orders</div>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '16px 20px', borderLeft: '4px solid #a78bfa' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>AVERAGE ORDER VALUE</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#f8fafc', margin: '6px 0 2px 0', whiteSpace: 'nowrap' }}>${(kpi.average_order_value || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8' }}>Revenue / Total Orders</div>
           </div>
 
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #38bdf8' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>UNIQUE CUSTOMERS</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{(kpi.unique_customers || 0).toLocaleString()}</div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Active Purchasing Accounts</div>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '16px 20px', borderLeft: '4px solid #38bdf8' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>UNIQUE CUSTOMERS</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#f8fafc', margin: '6px 0 2px 0' }}>{(kpi.unique_customers || 0).toLocaleString()}</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8' }}>Active Purchasing Accounts</div>
           </div>
 
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #fbbf24' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>REPEAT CUSTOMER RATE</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{kpi.repeat_customer_rate || 0}%</div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Customers with &gt;1 Order</div>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '16px 20px', borderLeft: '4px solid #fbbf24' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>REPEAT CUSTOMER RATE</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#f8fafc', margin: '6px 0 2px 0' }}>{kpi.repeat_customer_rate || 0}%</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8' }}>Customers with &gt;1 Order</div>
           </div>
 
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #f87171' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>CLICKSTREAM CONVERSION</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{kpi.clickstream_conversion_rate || 0}%</div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Sessions to Purchases</div>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '16px 20px', borderLeft: '4px solid #f87171' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>CLICKSTREAM CONVERSION</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#f8fafc', margin: '6px 0 2px 0' }}>{kpi.clickstream_conversion_rate || 0}%</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8' }}>Sessions to Purchases</div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid #334155', marginBottom: '24px' }}>
+        {/* Tabs Navigation */}
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid #334155', marginBottom: '24px', width: '100%' }}>
           {[
             { id: 'overview', label: 'Executive Overview' },
             { id: 'top-products', label: 'Top 5 Sales Products' },
@@ -235,13 +235,13 @@ export default function App() {
 
         {/* Tab 1: Executive Overview */}
         {activeTab === 'overview' && (
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', width: '100%' }}>
             <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ fontSize: '16px', fontWeight: 700 }}>Top 5 Products by Sales Revenue</div>
                 <span style={{ background: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', fontSize: '11px', fontWeight: 700, padding: '4px 8px', borderRadius: '4px' }}>Best Sellers</span>
               </div>
-              <div style={{ height: '320px' }}>
+              <div style={{ height: '320px', width: '100%' }}>
                 <Bar data={topProductsChartData} options={topProductsChartOptions} />
               </div>
             </div>
@@ -276,7 +276,7 @@ export default function App() {
 
         {/* Tab 2: Top Products */}
         {activeTab === 'top-products' && (
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', width: '100%' }}>
             <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>Top 5 Products Breakdown</div>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
               <thead>
@@ -309,7 +309,7 @@ export default function App() {
 
         {/* Tab 3: RFM & At-Risk */}
         {activeTab === 'rfm-atrisk' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
               <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
                 <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>RFM Customer Segments Distribution</div>
@@ -379,7 +379,7 @@ export default function App() {
 
         {/* Tab 4: Restock */}
         {activeTab === 'restock' && (
-          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', width: '100%' }}>
             <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>🚨 Products Requiring Restock ({restock.length})</div>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
               <thead>
