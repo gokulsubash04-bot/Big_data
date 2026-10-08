@@ -5,31 +5,13 @@
       "root": ".",
       "runtime": "python",
       "entrypoint": "app.py"
-    },
-    "frontend": {
-      "root": "frontend",
-      "framework": "vite",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "app",
-          "format": "url",
-          "env": "APP_URL"
-        }
-      ]
     }
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": {
-        "service": "app"
-      }
-    },
-    {
       "source": "/(.*)",
       "destination": {
-        "service": "frontend"
+        "service": "app"
       }
     }
   ]

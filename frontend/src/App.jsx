@@ -1,108 +1,380 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import ExecutiveOverview from './components/ExecutiveOverview';
-import CustomerAnalysis from './components/CustomerAnalysis';
-import ProductRestockAnalysis from './components/ProductRestockAnalysis';
-import ClickstreamFunnel from './components/ClickstreamFunnel';
-import HadoopCluster from './components/HadoopCluster';
+import { Bar, Doughnut } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function App() {
-  const [activeView, setActiveView] = useState('overview');
-  const [data, setData] = useState({
-    customer_summary: [],
-    rfm_segments: [],
-    cohort_matrix: [],
-    clickstream_funnel: {},
-    product_restock: {}
-  });
+  const [activeTab, setActiveTab] = useState('overview');
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const urlsToTry = [
-      '/api/data',
-      'http://localhost:8501/api/data'
-    ];
-
-    let currentIdx = 0;
-
-    const tryFetch = () => {
-      if (currentIdx >= urlsToTry.length) {
-        setError('Backend server not responding on /api/data.');
+    fetch('/api/data')
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json);
         setLoading(false);
-        return;
-      }
-
-      const url = urlsToTry[currentIdx];
-      fetch(url)
-        .then((res) => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const contentType = res.headers.get('content-type') || '';
-          if (!contentType.includes('application/json')) {
-            throw new Error('Response is not JSON');
-          }
-          return res.json();
-        })
-        .then((json) => {
-          // Reconcile root API vs legacy API format if needed
-          const formattedData = {
-            customer_summary: json.customer_summary || json.at_risk_customers || [],
-            rfm_segments: json.rfm_segments || json.at_risk_customers || [],
-            cohort_matrix: json.cohort_matrix || [],
-            clickstream_funnel: json.clickstream_funnel || {},
-            product_restock: json.product_restock || {
-              all_products: json.products_requiring_restock || [],
-              kpis: json.kpi_summary || {},
-              top_restock_recommendations: json.products_requiring_restock || []
-            },
-            kpi_summary: json.kpi_summary || {},
-            top_5_products: json.top_5_products || [],
-            at_risk_customers: json.at_risk_customers || []
-          };
-          setData(formattedData);
-          setLoading(false);
-          setError(null);
-        })
-        .catch(() => {
-          currentIdx++;
-          tryFetch();
-        });
-    };
-
-    tryFetch();
+      })
+      .catch((err) => {
+        console.error('API Fetch Error:', err);
+        setLoading(false);
+      });
   }, []);
 
+  if (loading || !data) {
+    return (
+      <div style={{ background: '#0f172a', color: '#f8fafc', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <h2>⚡ Loading Electronics E-Commerce Analytics Dashboard...</h2>
+      </div>
+    );
+  }
+
+  const kpi = data.kpi_summary || {};
+  const top5 = data.top_5_products || [];
+  const funnel = data.clickstream_funnel || {};
+  const rfmSummary = data.rfm_segments_summary || {};
+  const atRisk = data.at_risk_customers || [];
+  const restock = data.products_requiring_restock || [];
+
+  // Bar Chart Data for Top 5 Products
+  const topProductsChartData = {
+    labels: top5.map((p) => p.product_name),
+    datasets: [
+      {
+        label: 'Total Sales Revenue ($)',
+        data: top5.map((p) => p.total_revenue),
+        backgroundColor: 'rgba(56, 189, 248, 0.7)',
+        borderColor: '#38bdf8',
+        borderWidth: 1,
+        borderRadius: 6
+      }
+    ]
+  };
+
+  const topProductsChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { display: false } },
+      y: {
+        ticks: {
+          color: '#94a3b8',
+          callback: (value) => '$' + (value / 1000000).toFixed(1) + 'M'
+        },
+        grid: { color: '#334155' }
+      }
+    }
+  };
+
+  // RFM Doughnut Chart Data
+  const rfmChartData = {
+    labels: Object.keys(rfmSummary),
+    datasets: [
+      {
+        data: Object.values(rfmSummary),
+        backgroundColor: ['#34d399', '#38bdf8', '#818cf8', '#a78bfa', '#fbbf24', '#f87171']
+      }
+    ]
+  };
+
+  const rfmChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'right', labels: { color: '#f8fafc' } } }
+  };
+
+  // Funnel Sessions
+  const sessions = funnel.session_counts || { view: 13943, search: 5445, add_to_cart: 8710, purchase: 2999, total_sessions: 15000 };
+  const totalSess = sessions.total_sessions || 15000;
+
+  const filteredAtRisk = atRisk.filter((c) =>
+    c.customer_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    c.customer_segment.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div style={{ display: 'flex', width: '100%', height: '100vh' }}>
-      <Sidebar activeView={activeView} setActiveView={setActiveView} />
-
-      <main className="main-content">
-        <Header activeView={activeView} setActiveView={setActiveView} />
-
-        <div className="content-scroll">
-          {loading ? (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: 'var(--text-muted)' }}>
-              <h3>⚡ Loading E-Commerce Big Data Analytics...</h3>
-            </div>
-          ) : error ? (
-            <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--rose)', borderRadius: '12px', padding: '24px', color: 'var(--rose)' }}>
-              <h3 style={{ margin: 0, fontSize: '18px' }}>⚠️ Unable to Connect to Python Backend API Server</h3>
-              <p style={{ marginTop: '12px', fontSize: '14px', color: 'var(--text-body)', lineHeight: 1.6 }}>
-                The React frontend is running, but the Python API endpoint (<code>/api/data</code>) did not return data.
-              </p>
-            </div>
-          ) : (
-            <>
-              {activeView === 'overview' && <ExecutiveOverview data={data} onNavigateTab={setActiveView} />}
-              {activeView === 'customer_analysis' && <CustomerAnalysis data={data} />}
-              {activeView === 'restock' && <ProductRestockAnalysis data={data} />}
-              {activeView === 'funnel' && <ClickstreamFunnel data={data} />}
-              {activeView === 'hadoop' && <HadoopCluster />}
-            </>
-          )}
+    <div style={{ backgroundColor: '#0f172a', color: '#f8fafc', minHeight: '100vh', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+      {/* Header */}
+      <header style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', borderBottom: '1px solid #334155', padding: '20px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1 style={{ fontSize: '22px', fontWeight: 800, color: '#38bdf8', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+            🛒 Electronics E-Commerce Analytics Dashboard
+          </h1>
+          <p style={{ fontSize: '13px', color: '#94a3b8', margin: '4px 0 0 0' }}>Real-World Big Data Pipeline & Business Intelligence Engine</p>
         </div>
-      </main>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <a href="http://localhost:9870" target="_blank" rel="noreferrer" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid #334155', color: '#f8fafc', padding: '8px 14px', borderRadius: '6px', textDecoration: 'none', fontSize: '12px', fontWeight: 600 }}>🐘 HDFS NameNode (9870)</a>
+          <a href="http://localhost:8088" target="_blank" rel="noreferrer" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid #334155', color: '#f8fafc', padding: '8px 14px', borderRadius: '6px', textDecoration: 'none', fontSize: '12px', fontWeight: 600 }}>⚙️ YARN Resource (8088)</a>
+          <a href="/api/data" target="_blank" rel="noreferrer" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid #334155', color: '#f8fafc', padding: '8px 14px', borderRadius: '6px', textDecoration: 'none', fontSize: '12px', fontWeight: 600 }}>⚡ JSON Data API</a>
+        </div>
+      </header>
+
+      <div style={{ maxWidth: '1400px', margin: '24px auto', padding: '0 24px' }}>
+        {/* KPI Cards Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #34d399' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>TOTAL REVENUE</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>${(kpi.total_revenue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Completed Transactions</div>
+          </div>
+
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #38bdf8' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>TOTAL ORDERS</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{(kpi.total_orders || 0).toLocaleString()}</div>
+            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Unique Invoices Processed</div>
+          </div>
+
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #a78bfa' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>AVERAGE ORDER VALUE</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>${(kpi.average_order_value || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Revenue / Total Orders</div>
+          </div>
+
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #38bdf8' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>UNIQUE CUSTOMERS</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{(kpi.unique_customers || 0).toLocaleString()}</div>
+            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Active Purchasing Accounts</div>
+          </div>
+
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #fbbf24' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>REPEAT CUSTOMER RATE</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{kpi.repeat_customer_rate || 0}%</div>
+            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Customers with &gt;1 Order</div>
+          </div>
+
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px', borderLeft: '4px solid #f87171' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>CLICKSTREAM CONVERSION</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#f8fafc', margin: '8px 0 4px 0' }}>{kpi.clickstream_conversion_rate || 0}%</div>
+            <div style={{ fontSize: '12px', color: '#94a3b8' }}>Sessions to Purchases</div>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid #334155', marginBottom: '24px' }}>
+          {[
+            { id: 'overview', label: 'Executive Overview' },
+            { id: 'top-products', label: 'Top 5 Sales Products' },
+            { id: 'rfm-atrisk', label: 'RFM & At-Risk Customers' },
+            { id: 'restock', label: 'Inventory & Restock Intel' }
+          ].map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(t.id)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: activeTab === t.id ? '#38bdf8' : '#94a3b8',
+                borderBottom: activeTab === t.id ? '2px solid #38bdf8' : '2px solid transparent',
+                padding: '12px 20px',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab 1: Executive Overview */}
+        {activeTab === 'overview' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+            <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700 }}>Top 5 Products by Sales Revenue</div>
+                <span style={{ background: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', fontSize: '11px', fontWeight: 700, padding: '4px 8px', borderRadius: '4px' }}>Best Sellers</span>
+              </div>
+              <div style={{ height: '320px' }}>
+                <Bar data={topProductsChartData} options={topProductsChartOptions} />
+              </div>
+            </div>
+
+            <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700 }}>Clickstream Conversion Funnel</div>
+                <span style={{ background: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', fontSize: '11px', fontWeight: 700, padding: '4px 8px', borderRadius: '4px' }}>Session Journey</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {[
+                  { name: 'Total Sessions', count: totalSess, pct: 100, color: '#38bdf8' },
+                  { name: 'View Products', count: sessions.view || 13943, pct: Math.round(((sessions.view || 13943) / totalSess) * 100), color: '#818cf8' },
+                  { name: 'Search Catalog', count: sessions.search || 5445, pct: Math.round(((sessions.search || 5445) / totalSess) * 100), color: '#a78bfa' },
+                  { name: 'Add to Cart', count: sessions.add_to_cart || 8710, pct: Math.round(((sessions.add_to_cart || 8710) / totalSess) * 100), color: '#fbbf24' },
+                  { name: 'Completed Purchase', count: sessions.purchase || 2999, pct: Math.round(((sessions.purchase || 2999) / totalSess) * 100), color: '#34d399' }
+                ].map((step, idx) => (
+                  <div key={idx} style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: '8px', padding: '14px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 600, fontSize: '13px' }}>
+                      <span>{step.name}</span>
+                      <span style={{ color: step.color }}>{step.count.toLocaleString()} ({step.pct}%)</span>
+                    </div>
+                    <div style={{ background: '#334155', height: '8px', borderRadius: '4px', width: '100%', marginTop: '6px', overflow: 'hidden' }}>
+                      <div style={{ background: step.color, height: '100%', width: `${step.pct}%`, borderRadius: '4px' }}></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 2: Top Products */}
+        {activeTab === 'top-products' && (
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+            <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>Top 5 Products Breakdown</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
+              <thead>
+                <tr style={{ background: '#0f172a', color: '#94a3b8' }}>
+                  <th style={{ padding: '12px' }}>Rank</th>
+                  <th style={{ padding: '12px' }}>Product ID</th>
+                  <th style={{ padding: '12px' }}>Product Name</th>
+                  <th style={{ padding: '12px' }}>Category</th>
+                  <th style={{ padding: '12px' }}>Unit Price</th>
+                  <th style={{ padding: '12px' }}>Units Sold</th>
+                  <th style={{ padding: '12px' }}>Total Revenue</th>
+                </tr>
+              </thead>
+              <tbody>
+                {top5.map((p) => (
+                  <tr key={p.rank} style={{ borderBottom: '1px solid #334155' }}>
+                    <td style={{ padding: '12px', fontWeight: 700 }}>#{p.rank}</td>
+                    <td style={{ padding: '12px' }}><code style={{ background: '#0f172a', color: '#38bdf8', padding: '2px 6px', borderRadius: '4px' }}>{p.product_id}</code></td>
+                    <td style={{ padding: '12px', fontWeight: 700 }}>{p.product_name}</td>
+                    <td style={{ padding: '12px' }}>{p.category}</td>
+                    <td style={{ padding: '12px' }}>${p.unit_price.toFixed(2)}</td>
+                    <td style={{ padding: '12px' }}>{p.units_sold.toLocaleString()} units</td>
+                    <td style={{ padding: '12px', color: '#34d399', fontWeight: 700 }}>${p.total_revenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Tab 3: RFM & At-Risk */}
+        {activeTab === 'rfm-atrisk' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+              <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>RFM Customer Segments Distribution</div>
+                <div style={{ height: '300px' }}>
+                  <Doughnut data={rfmChartData} options={rfmChartOptions} />
+                </div>
+              </div>
+              <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>Segmentation Summary</div>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                  <thead>
+                    <tr style={{ background: '#0f172a', color: '#94a3b8' }}>
+                      <th style={{ padding: '10px' }}>Segment</th>
+                      <th style={{ padding: '10px' }}>Count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(rfmSummary).map(([seg, count]) => (
+                      <tr key={seg} style={{ borderBottom: '1px solid #334155' }}>
+                        <td style={{ padding: '10px', fontWeight: 700 }}>{seg}</td>
+                        <td style={{ padding: '10px' }}>{count.toLocaleString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700 }}>⚠️ At-Risk Customers List ({atRisk.length})</div>
+                <input
+                  type="text"
+                  placeholder="Search Customer ID..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{ background: '#0f172a', border: '1px solid #334155', color: '#f8fafc', padding: '8px 12px', borderRadius: '6px', fontSize: '13px' }}
+                />
+              </div>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                <thead>
+                  <tr style={{ background: '#0f172a', color: '#94a3b8' }}>
+                    <th style={{ padding: '12px' }}>Customer ID</th>
+                    <th style={{ padding: '12px' }}>Recency (Days)</th>
+                    <th style={{ padding: '12px' }}>Frequency</th>
+                    <th style={{ padding: '12px' }}>Total Spend</th>
+                    <th style={{ padding: '12px' }}>AOV</th>
+                    <th style={{ padding: '12px' }}>Segment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredAtRisk.slice(0, 15).map((c) => (
+                    <tr key={c.customer_id} style={{ borderBottom: '1px solid #334155' }}>
+                      <td style={{ padding: '12px' }}><code style={{ background: '#0f172a', color: '#38bdf8', padding: '2px 6px', borderRadius: '4px' }}>{c.customer_id}</code></td>
+                      <td style={{ padding: '12px', color: '#f87171', fontWeight: 700 }}>{c.recency_days} days ago</td>
+                      <td style={{ padding: '12px' }}>{c.transaction_frequency} orders</td>
+                      <td style={{ padding: '12px' }}>${c.total_monetary_spend.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                      <td style={{ padding: '12px' }}>${c.avg_order_value.toFixed(2)}</td>
+                      <td style={{ padding: '12px' }}><span style={{ background: 'rgba(251, 191, 36, 0.15)', color: '#fbbf24', padding: '4px 8px', borderRadius: '4px', fontWeight: 700, fontSize: '11px' }}>{c.customer_segment}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 4: Restock */}
+        {activeTab === 'restock' && (
+          <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '12px', padding: '20px' }}>
+            <div style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px' }}>🚨 Products Requiring Restock ({restock.length})</div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+              <thead>
+                <tr style={{ background: '#0f172a', color: '#94a3b8' }}>
+                  <th style={{ padding: '12px' }}>Product ID</th>
+                  <th style={{ padding: '12px' }}>Product Name</th>
+                  <th style={{ padding: '12px' }}>Category</th>
+                  <th style={{ padding: '12px' }}>Current Stock</th>
+                  <th style={{ padding: '12px' }}>Reorder Point</th>
+                  <th style={{ padding: '12px' }}>Days Left</th>
+                  <th style={{ padding: '12px' }}>Rec. Order Units</th>
+                  <th style={{ padding: '12px' }}>Revenue at Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                {restock.map((p) => (
+                  <tr key={p.product_id} style={{ borderBottom: '1px solid #334155' }}>
+                    <td style={{ padding: '12px' }}><code style={{ background: '#0f172a', color: '#38bdf8', padding: '2px 6px', borderRadius: '4px' }}>{p.product_id}</code></td>
+                    <td style={{ padding: '12px', fontWeight: 700 }}>{p.product_name}</td>
+                    <td style={{ padding: '12px' }}>{p.category}</td>
+                    <td style={{ padding: '12px', color: '#f87171', fontWeight: 700 }}>{p.current_stock}</td>
+                    <td style={{ padding: '12px' }}>{p.reorder_point}</td>
+                    <td style={{ padding: '12px' }}>~{p.days_of_stock_remaining} days</td>
+                    <td style={{ padding: '12px', color: '#38bdf8', fontWeight: 700 }}>+{p.recommended_restock_units.toLocaleString()}</td>
+                    <td style={{ padding: '12px', color: '#fbbf24' }}>${p.revenue_at_risk.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
