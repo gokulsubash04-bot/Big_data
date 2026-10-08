@@ -1185,6 +1185,77 @@ def start_yarn_server():
         print(f"YARN server info: {e}")
 
 
+def app(environ, start_response):
+    path = environ.get("PATH_INFO", "/").split("?")[0]
+    method = environ.get("REQUEST_METHOD", "GET")
+
+    if method == "OPTIONS":
+        status = "200 OK"
+        headers = [
+            ("Access-Control-Allow-Origin", "*"),
+            ("Access-Control-Allow-Methods", "GET, OPTIONS"),
+            ("Access-Control-Allow-Headers", "*"),
+        ]
+        start_response(status, headers)
+        return [b""]
+
+    if path in ["/api/data", "/api/analytics"]:
+        data = compute_all_analytics()
+        body = json.dumps(data, indent=2).encode("utf-8")
+        content_type = "application/json"
+    elif path == "/api/summary":
+        data = compute_all_analytics()["kpi_summary"]
+        body = json.dumps(data, indent=2).encode("utf-8")
+        content_type = "application/json"
+    elif path == "/api/top_products":
+        data = compute_all_analytics()["top_5_products"]
+        body = json.dumps(data, indent=2).encode("utf-8")
+        content_type = "application/json"
+    elif path == "/api/rfm":
+        analytics = compute_all_analytics()
+        data = {
+            "segments_summary": analytics["rfm_segments_summary"],
+            "raw_segments": load_csv("rfm_customer_segments.csv")
+        }
+        body = json.dumps(data, indent=2).encode("utf-8")
+        content_type = "application/json"
+    elif path == "/api/at_risk":
+        data = compute_all_analytics()["at_risk_customers"]
+        body = json.dumps(data, indent=2).encode("utf-8")
+        content_type = "application/json"
+    elif path in ["/api/restock", "/api/product_restock"]:
+        restock_data = load_json("product_restock_recommendations.json")
+        if not restock_data:
+            restock_data = compute_all_analytics()["products_requiring_restock"]
+        body = json.dumps(restock_data, indent=2).encode("utf-8")
+        content_type = "application/json"
+    elif path == "/api/clickstream_funnel":
+        funnel_summary = load_json("clickstream_funnel_summary.json")
+        if not funnel_summary:
+            funnel_summary = compute_all_analytics()["clickstream_funnel"]
+        body = json.dumps(funnel_summary, indent=2).encode("utf-8")
+        content_type = "application/json"
+    else:
+        body = get_embedded_dashboard_html().encode("utf-8")
+        content_type = "text/html; charset=utf-8"
+
+    status = "200 OK"
+    headers = [
+        ("Content-Type", content_type),
+        ("Access-Control-Allow-Origin", "*"),
+        ("Access-Control-Allow-Methods", "GET, OPTIONS"),
+        ("Access-Control-Allow-Headers", "*"),
+        ("Content-Length", str(len(body)))
+    ]
+    start_response(status, headers)
+    return [body]
+
+
+# Top-level exports for Vercel Python Runtime Serverless Functions
+handler = app
+application = app
+
+
 def main():
     print("=========================================================")
     print("Starting Electronics E-Commerce Analytics Web Servers...")
@@ -1199,8 +1270,8 @@ def main():
     t1.start()
     t2.start()
 
-    handler = DashboardHandler
-    with ThreadedTCPServer(("", PORT), handler) as httpd:
+    srv_handler = DashboardHandler
+    with ThreadedTCPServer(("", PORT), srv_handler) as httpd:
         print(f"Serving Dashboard HTTP on port {PORT}...")
         try:
             httpd.serve_forever()
